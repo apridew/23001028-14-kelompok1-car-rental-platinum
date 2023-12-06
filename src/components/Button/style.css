@@ -1,0 +1,13 @@
+.button-primary button {
+    background-color: var(--green-lime);
+    font-size: 14px;
+    font-weight: 700;
+    line-height: 20px;
+    padding: 8px 12px;
+    border-radius: 2px;
+    max-width: 150px;
+}
+
+.button-primary button:hover {
+    background-color: var(--green-dark) !important;
+}

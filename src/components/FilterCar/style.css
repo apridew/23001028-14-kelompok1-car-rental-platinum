@@ -1,0 +1,111 @@
+@import url('https://fonts.googleapis.com/css2?family=Rubik:wght@300&display=swap');
+
+#categories,
+#filter-car input,
+#filter-car select,
+#filter-car label {
+    font-family: Rubik, Arial, Helvetica, sans-serif;
+    font-weight: 300;
+    line-height: 18px;
+    font-size: 12px;
+    font-weight: 400;
+    color: #8A8A8A;
+}
+
+#filter-car label {
+    padding-bottom: 4px;
+}
+
+#filter-car {
+    position: relative;
+    top: -60px;
+    border-radius: 8px;
+    background: #fff;
+    box-shadow: 0 0 10px 0 rgba(0, 0, 0, .15);
+    padding: 24px;
+    margin: 30px auto;
+    z-index: 10;
+    max-width: 1047px;
+}
+
+#filter-car input {
+    color: #222;
+    padding: 10px;
+    outline: #35B0A7;
+    border: 1px solid #0a0a0a28;
+    border-radius: 4px;
+}
+
+#filter-car input:focus {
+    border: 1px solid #35b0a7;
+}
+
+#categories {
+    color: #3c3c3c;
+    padding-bottom: 10px;
+}
+
+#filter-car select {
+    padding: 10px;
+    color: #222;
+    outline: var(--green-lime);
+    border: 1px solid #0a0a0a28;
+    border-radius: 4px;
+}
+
+#filter-car select:focus {
+    border: 1px solid var(--green-lime);
+}
+
+#filter-car option:checked {
+    background-color: #c9e7ca;
+    color: var(--green-lime);
+    font-weight: 700;
+}
+
+#filter-car .btn-success,
+#filter-car .btn-danger {
+    font-size: 12px;
+    font-weight: 700;
+    line-height: 20px;
+    padding: 10px 12px;
+    border-radius: 2px;
+    max-width: 150px;
+    margin: 10px 12px;
+    width: 95px;
+}
+
+#filter-car .btn-success {
+    background-color: var(--green-lime);
+}
+
+#filter-car .btn-success:hover,
+.card-content button:hover {
+    background-color: var(--green-dark) !important;
+}
+
+#filter-car .btn-danger:hover {
+    background-color: #a71b29 !important;
+}
+
+.overlay-bg {
+    height: 100%;
+    width: 100%;
+    z-index: 9;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.308);
+    background-color: rgba(0, 0, 0, 0.308);
+}
+
+@media screen and (max-width: 991px) {
+    .wrapper-filter-car {
+        padding: 10px;
+    }
+
+    #filter-car {
+        position: relative;
+        top: 0;
+    }
+}

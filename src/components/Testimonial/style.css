@@ -1,0 +1,118 @@
+#testimonial p {
+    max-width: 468px;
+    font-size: 14px;
+    font-weight: 700;
+    line-height: 20px;
+    margin-bottom: 16px;
+}
+
+#testimonial img {
+    width: 80px;
+}
+
+.testimonial-card {
+    max-width: 619px;
+    background-color: #f1f3ff;
+    border-color: #d0d0d0;
+    box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.048);
+    margin-right: 20px;
+}
+
+#testimonial i {
+    color: #f9cc00;
+    padding: 0px 2px 8px 0px;
+}
+
+#testimonial ul {
+    height: 350px;
+}
+
+#testimonial li {
+    margin-right: 20px;
+    width: 619px !important;
+}
+
+.react-multi-carousel-list {
+    position: static !important;
+    align-items: flex-end !important;
+    justify-content: center;
+}
+
+.button-slide {
+    position: absolute;
+    width: 20px !important;
+}
+
+.button-left,
+.button-right {
+    display: flex;
+    margin: auto;
+    align-items: center;
+    justify-content: center;
+    padding: 15px 15px;
+    border-radius: 50%;
+    height: 30px;
+    border: 1px solid #C4C4C4;
+    background-color: white;
+    cursor: pointer;
+}
+
+.button-left {
+    margin-right: 50px;
+}
+
+.button-right {
+    margin-left: 50px;
+}
+
+.button-left h6,
+.button-right h6 {
+    width: 35px !important;
+    font-size: 30px;
+    position: relative;
+}
+
+.button-right h6 {
+    left: 0;
+}
+
+.button-left.clicked,
+.button-right.clicked {
+    background-color: var(--green-lime);
+    color: white;
+    border: 1px solid #C4C4C4;
+}
+
+@media screen and (max-width: 575px) {
+    #testimonial ul {
+        height: 430px;
+    }
+
+    #testimonial li {
+        margin-right: 20px;
+        max-width: 300px !important;
+    }
+
+    #testimonial img {
+        padding-top: 10px;
+    }
+
+    .testimonial-card {
+        max-width: 300px;
+    }
+}
+
+@media screen and (min-width: 576px) and (max-width: 767px) {
+    #testimonial li {
+        margin-right: 20px;
+        width: 400px !important;
+    }
+
+    .testimonial-card {
+        width: 100%;
+    }
+
+    #testimonial ul {
+        height: 420px;
+    }
+}

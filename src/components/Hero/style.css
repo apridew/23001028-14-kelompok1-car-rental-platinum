@@ -1,0 +1,65 @@
+#hero,
+#hero .row {
+    background-color: var(--blue-bg);
+}
+
+#hero {
+    margin-top: 30px;
+}
+
+.wrapper-hero {
+    max-width: 1440px;
+
+}
+
+.hero-left>h1 {
+    max-width: 568px;
+    font-size: 36px;
+    font-weight: 700;
+    line-height: 150%;
+    margin-bottom: 16px;
+}
+
+.hero-left>p {
+    max-width: 468px;
+    font-size: 14px;
+    font-weight: 700;
+    line-height: 20px;
+    margin-bottom: 16px;
+}
+
+.hero-left>button {
+    background-color: var(--green-lime);
+    font-size: 14px;
+    font-weight: 700;
+    line-height: 20px;
+    padding: 8px 12px;
+    border-radius: 2px;
+    max-width: 150px;
+}
+
+.hero-left>button:hover {
+    background-color: var(--green-dark) !important;
+}
+
+.hero-right {
+    padding-top: 25px;
+}
+
+@media screen and (min-width: 1025px) and (max-width: 1600px) {
+    .wrapper-hero {
+        padding-left: 100px;
+    }
+}
+
+@media screen and (min-width: 576px) and (max-width: 1024px) {
+    .wrapper-hero {
+        padding-left: 40px;
+    }
+}
+
+@media screen and (max-width: 575px) {
+    .wrapper-hero {
+        padding-left: 16px;
+    }
+}

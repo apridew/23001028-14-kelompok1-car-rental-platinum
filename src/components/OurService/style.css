@@ -1,0 +1,36 @@
+#our-services h2 {
+    max-width: 468px;
+}
+
+.services-right i {
+    background-color: #CFD4ED;
+    color: var(--blue-primary);
+    border-radius: 50%;
+    font-size: 20px;
+    padding: 2px 4px;
+    font-weight: 600;
+}
+
+.services-right-list>p {
+    display: flex;
+    align-items: center;
+}
+
+.services-right span {
+    padding-right: 16px;
+}
+
+.services-right p,
+.services-right ul {
+    max-width: 468px;
+    font-size: 14px;
+    font-weight: 700;
+    line-height: 20px;
+    margin-bottom: 16px;
+}
+
+@media screen and (max-width: 375px) {
+    .services-right-list {
+        max-width: 295px;
+    }
+}
