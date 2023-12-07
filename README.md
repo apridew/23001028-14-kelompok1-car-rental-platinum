@@ -1,6 +1,6 @@
-# Binar Car Rental - Gold Challenge
+# Binar Car Rental for Customer - Platinum Challenge
 
-This project is part of the Binar Academy for Gold Challenge.
+This project is part of the Binar Academy for Platinum Challenge.
 
 ## Prerequisites
 
