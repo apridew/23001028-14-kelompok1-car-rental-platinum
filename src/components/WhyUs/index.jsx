@@ -1,28 +1,7 @@
 import "./style.css";
 import WhyUsCard from "../WhyUsCard";
+import * as contentData from "../../utils/contentData";
 
-const cardContent = [
-  {
-    iconImg: "bi bi-hand-thumbs-up",
-    title: "Mobil Lengkap",
-    description: "Tersedia banyak pilihan mobil, kondisi masih baru, bersih dan terawat",
-  },
-  {
-    iconImg: "bi bi-tag",
-    title: "Harga Murah",
-    description: "Tersedia banyak pilihan mobil, kondisi masih baru, bersih dan terawat",
-  },
-  {
-    iconImg: "bi bi-clock",
-    title: "Layanan 24 Jam",
-    description: "Siap melayani kebutuhan Anda selama 24 jam nonstop. Kami juga tersedia di akhir minggu",
-  },
-  {
-    iconImg: "bi bi-award",
-    title: "Sopir Profesional",
-    description: "Sopir yang profesional, berpengalaman, jujur, ramah dan selalu tepat waktu",
-  },
-];
 const WhyUs = () => {
   return (
     <section id="why-us">
@@ -36,7 +15,7 @@ const WhyUs = () => {
       </div>
       <div className="container">
         <div className="row d-flex flex-lg-nowrap justify-content-md-between">
-          {cardContent.map((data, id) => (
+          {contentData.whyUsContent.map((data, id) => (
             <WhyUsCard key={id} all={data} />
           ))}
         </div>

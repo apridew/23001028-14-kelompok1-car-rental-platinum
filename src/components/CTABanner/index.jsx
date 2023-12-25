@@ -8,8 +8,11 @@ const CTABanner = () => {
         <div className="row">
           <div className="col d-flex flex-column align-items-center text-center px-5">
             <h1>Sewa Mobil di Jakarta Sekarang</h1>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-            <Button name="Mulai Sewa Mobil" />
+            <p>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+              eiusmod tempor incididunt ut labore et dolore magna aliqua.
+            </p>
+            <Button name="Mulai Sewa Mobil" link="/search-car" />
           </div>
         </div>
       </div>

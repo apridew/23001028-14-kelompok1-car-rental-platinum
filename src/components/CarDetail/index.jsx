@@ -2,12 +2,9 @@ import "./style.css";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import { useEffect, useState } from "react";
+import * as contentData from "../../utils/contentData";
+import * as formater from "../../helpers/formaters";
 
-const detailCarList = [
-  { list: "Tidak termasuk biaya makan sopir Rp 75.000/hari" },
-  { list: "Jika overtime lebih dari 12 jam akan ada tambahan biaya Rp 20.000/jam" },
-  { list: "Tidak termasuk akomodasi penginapan" },
-];
 const CarDetail = () => {
   const [carDetail, setCarDetail] = useState({});
 
@@ -29,15 +26,6 @@ const CarDetail = () => {
       });
   };
 
-  const toIdrFormat = (number) => {
-    return new Intl.NumberFormat("id-ID", {
-      style: "currency",
-      currency: "IDR",
-      minimumFractionDigits: 0,
-      maximumFractionDigits: 0,
-    }).format(number);
-  };
-
   return (
     <>
       <div className="container mb-5" id="car-detail">
@@ -46,18 +34,23 @@ const CarDetail = () => {
             <p>Tentang Paket</p>
             <p>Include</p>
             <ul>
-              <li>Apa saja yang termasuk dalam paket misal durasi max 12 jam</li>
+              <li>
+                Apa saja yang termasuk dalam paket misal durasi max 12 jam
+              </li>
               <li>Sudah termasuk bensin selama 12 jam</li>
               <li>Sudah termasuk Tiket Wisata</li>
               <li>Sudah termasuk pajak</li>
             </ul>
             <p>Exclude</p>
             <ul>
-              {detailCarList.map((data, id) => (
+              {contentData.detailCarList.map((data, id) => (
                 <li key={id}>{data.list}</li>
               ))}
             </ul>
-            <div className="accordion border-0 shadow-none px-0" id="accordion-detail-car">
+            <div
+              className="accordion border-0 shadow-none px-0"
+              id="accordion-detail-car"
+            >
               <div className="accordion-item border-0">
                 <h2 className="accordion-header">
                   <button
@@ -71,16 +64,20 @@ const CarDetail = () => {
                     <p>Refund, Reschedule, Overtime</p>
                   </button>
                 </h2>
-                <div id="collapseOne" className="accordion-collapse collapse show" data-bs-parent="#accordion-detail-car">
+                <div
+                  id="collapseOne"
+                  className="accordion-collapse collapse show"
+                  data-bs-parent="#accordion-detail-car"
+                >
                   <div className="accordion-body ps-0 py-0 b-0">
                     <ul>
-                      {detailCarList.map((data, id) => (
+                      {contentData.detailCarList.map((data, id) => (
                         <li key={id}>{data.list}</li>
                       ))}
-                      {detailCarList.map((data, id) => (
+                      {contentData.detailCarList.map((data, id) => (
                         <li key={id}>{data.list}</li>
                       ))}
-                      {detailCarList.map((data, id) => (
+                      {contentData.detailCarList.map((data, id) => (
                         <li key={id}>{data.list}</li>
                       ))}
                     </ul>
@@ -92,25 +89,21 @@ const CarDetail = () => {
           <div className="col-lg-4 col-md-6 col-sm-12 p-0 content-right d-flex justify-content-center">
             <div className="frame-card">
               <div className="content-card-top">
-                <img className="img-fluid" src={carDetail.image} alt={carDetail.name} />
+                <img
+                  className="img-fluid"
+                  src={carDetail.image}
+                  alt={carDetail.name}
+                />
                 <p>{carDetail.name}</p>
                 <h6>
                   <span>
                     <i className="bi bi-people"></i>
                   </span>
-                  {(() => {
-                    if (carDetail.category === "small") {
-                      return "2 - 4 Orang";
-                    } else if (carDetail.category === "medium") {
-                      return "4 - 6 Orang";
-                    } else {
-                      return "6 - 8 Orang";
-                    }
-                  })()}
+                  {formater.categoryTextFormater(carDetail.category)}
                 </h6>
                 <div className="content-card-bottom mt-4">
                   <p>Total</p>
-                  <p>{toIdrFormat(carDetail.price)}</p>
+                  <p>{formater.idrFormater(carDetail.price)}</p>
                 </div>
               </div>
             </div>

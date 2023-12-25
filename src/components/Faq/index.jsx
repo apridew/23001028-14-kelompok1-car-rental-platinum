@@ -1,38 +1,7 @@
 import FaqAccordion from "../FaqAccordion";
 import "./style.css";
+import * as contentData from "../../utils/contentData";
 
-const accordionData = [
-  {
-    bsTarget: "#collapseOne",
-    ariaExpanded: "true",
-    ariaControls: "collapseOne",
-    title: "Apa saja syarat yang dibutuhkan ?",
-  },
-  {
-    bsTarget: "#collapseTwo",
-    ariaExpanded: "false",
-    ariaControls: "collapseTwo",
-    title: "Berapa hari minimal sewa mobil lepas kunci ?",
-  },
-  {
-    bsTarget: "#collapseThree",
-    ariaExpanded: "false",
-    ariaControls: "collapseThree",
-    title: "Berapa hari sebelumnya sabaiknya booking sewa mobil ?",
-  },
-  {
-    bsTarget: "#collapseFour",
-    ariaExpanded: "false",
-    ariaControls: "collapseFour",
-    title: "Apakah Ada biaya antar-jemput ?",
-  },
-  {
-    bsTarget: "#collapseFive",
-    ariaExpanded: "false",
-    ariaControls: "collapseFive",
-    title: "Bagaimana jika terjadi kecelakaan ?",
-  },
-];
 const Faq = () => {
   return (
     <section id="faq">
@@ -44,7 +13,7 @@ const Faq = () => {
           </div>
           <div className="col">
             <div className="accordion" id="accordion-faq">
-              {accordionData.map((data, id) => (
+              {contentData.accordionData.map((data, id) => (
                 <FaqAccordion key={id} all={data} />
               ))}
             </div>

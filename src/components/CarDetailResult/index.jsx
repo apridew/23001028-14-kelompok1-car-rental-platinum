@@ -1,7 +1,8 @@
-import { useEffect, useState } from "react";
 import "./style.css";
-import axios from "axios";
+import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import axios from "axios";
+import * as formater from "../../helpers/formaters";
 
 const CarDetailResult = () => {
   const [carDetail, setCarDetail] = useState({});
@@ -23,42 +24,24 @@ const CarDetailResult = () => {
       });
   };
 
-  const toIdrFormat = (number) => {
-    return new Intl.NumberFormat("id-ID", {
-      style: "currency",
-      currency: "IDR",
-      minimumFractionDigits: 0,
-      maximumFractionDigits: 0,
-    }).format(number);
-  };
+  const dataCarDetail = formater.dataCarFormater(
+    carDetail.name,
+    carDetail.category,
+    carDetail.price,
+    carDetail.status
+  );
 
-  const dataCarDetail = [
-    { title: "Nama Mobil", content: carDetail.name, icon: "bi bi-car-front-fill" },
-    { title: "Kategori", content: carDetail.category, icon: "bi bi-people" },
-    { title: "Harga Sewa per Hari", content: toIdrFormat(carDetail.price), icon: "bi bi-tags" },
-    { title: "Status", content: carDetail.status, icon: "bi bi-bounding-box" },
-  ];
+  const categoryText = formater.categoryTextFormater(carDetail.category);
 
-  let categoryText = "";
-  if (carDetail.category == "small") {
-    categoryText = "2 - 4 Orang";
-  } else if (carDetail.category == "medium") {
-    categoryText = "4 - 6 Orang";
-  } else {
-    categoryText = "6 - 8 Orang";
-  }
-
-  let statusText = "";
-  if (carDetail.status == "true") {
-    statusText = "Tidak Tersedia";
-  } else {
-    statusText = "Tersedia";
-  }
+  const statusText = formater.statusTextFormater(carDetail.status);
 
   return (
     <>
       <div className="bg-car-detail"></div>
-      <div className="container wrapper-car-detail-result mb-0" id="car-detail-result">
+      <div
+        className="container wrapper-car-detail-result mb-0"
+        id="car-detail-result"
+      >
         <h5>Pencarianmu</h5>
         <div className="row">
           {dataCarDetail.map((data, id) => (
@@ -67,7 +50,9 @@ const CarDetailResult = () => {
               <div className="box-data mt-2">
                 {data.title === "Kategori" && <p>{categoryText}</p>}
                 {data.title === "Status" && <p>{statusText}</p>}
-                {data.title !== "Kategori" && data.title !== "Status" && <p>{data.content}</p>}
+                {data.title !== "Kategori" && data.title !== "Status" && (
+                  <p>{data.content}</p>
+                )}
                 <i className={data.icon}></i>
               </div>
             </div>

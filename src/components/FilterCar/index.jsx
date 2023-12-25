@@ -17,7 +17,13 @@ const FilterCar = () => {
     handleGetCarList(nameCar, categoryCar, availableCar, minPrice, maxPrice);
   }, []);
 
-  const handleGetCarList = (inputName, inputCategory, inputAvailable, inputMin, inputMax) => {
+  const handleGetCarList = (
+    inputName,
+    inputCategory,
+    inputAvailable,
+    inputMin,
+    inputMax
+  ) => {
     axios
       .get(
         `https://api-car-rental.binaracademy.org/customer/v2/car?page=1&pageSize=10&name=${inputName}&category=${inputCategory}&isRented=${inputAvailable}&minPrice=${inputMin}&maxPrice=${inputMax}`
@@ -95,14 +101,16 @@ const FilterCar = () => {
 
   return (
     <>
-      {overlayBgOn && <div onClick={handleOverlayOff} className="overlay-bg"></div>}
+      {overlayBgOn && (
+        <div onClick={handleOverlayOff} className="overlay-bg"></div>
+      )}
 
       <div onClick={handleOverlayOn} className="container wrapper-filter-car">
         <div className="row d-flex align-items-end" id="filter-car">
           <div className="col d-flex flex-column py-2">
             <label htmlFor="name">Nama Mobil</label>
             <input
-              onKeyPress={handleKeyPress}
+              onKeyDown={handleKeyPress}
               onChange={handleNameCar}
               autoComplete="off"
               id="name"
@@ -112,7 +120,12 @@ const FilterCar = () => {
           </div>
           <div className="col d-flex flex-column py-2">
             <label htmlFor="categories">Kategori</label>
-            <select onChange={handleCategoryCar} name="categories" id="categories" value={categoryCar}>
+            <select
+              onChange={handleCategoryCar}
+              name="categories"
+              id="categories"
+              value={categoryCar}
+            >
               <option value="">Masukan Kapasitas Mobil</option>
               <option value="small">2 - 4 Orang</option>
               <option value="medium">4 - 6 Orang</option>
@@ -121,7 +134,12 @@ const FilterCar = () => {
           </div>
           <div className="col d-flex flex-column py-2">
             <label htmlFor="price">Harga</label>
-            <select onChange={handlePriceCar} name="price" id="price" value={`${minPrice}-${maxPrice}`}>
+            <select
+              onChange={handlePriceCar}
+              name="price"
+              id="price"
+              value={`${minPrice}-${maxPrice}`}
+            >
               <option value="">Masukan Harga Sewa per Hari</option>
               <option value="0-399999">&lt; Rp. 400.000</option>
               <option value="400000-600000">Rp 400.000 - Rp 600.000</option>
@@ -130,7 +148,12 @@ const FilterCar = () => {
           </div>
           <div className="col d-flex flex-column py-2">
             <label htmlFor="status">Status</label>
-            <select onChange={handleAvailableCar} name="status" id="status" value={availableCar}>
+            <select
+              onChange={handleAvailableCar}
+              name="status"
+              id="status"
+              value={availableCar}
+            >
               <option value="true">Disewa</option>
               <option value="false">Tersedia</option>
             </select>
@@ -144,7 +167,9 @@ const FilterCar = () => {
               }
               handleOverlayOff();
             }}
-            className={`btn border-0 ${isSubmit ? "btn-danger" : "btn-success"}`}
+            className={`btn border-0 ${
+              isSubmit ? "btn-danger" : "btn-success"
+            }`}
           >
             {isSubmit ? "Reset" : "Cari Mobil"}
           </button>

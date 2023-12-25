@@ -1,16 +1,18 @@
 import { Link } from "react-router-dom";
 import "./style.css";
 import { HashLink } from "react-router-hash-link";
+import * as formater from "../../helpers/formaters";
 
-const scrollTop = () => {
-  window.scrollTo(0, 0);
-};
 const Navbar = () => {
   return (
     <header>
       <nav className="navbar navbar-expand-lg fixed-top">
         <div className="container-fluid wrapper-nav">
-          <Link onClick={scrollTop} to={"/"} className="navbar-brand fw-bold">
+          <Link
+            onClick={formater.scrollTop}
+            to={"/"}
+            className="navbar-brand fw-bold"
+          >
             Binar Car
           </Link>
           <button
@@ -23,19 +25,42 @@ const Navbar = () => {
           >
             <span className="navbar-toggler-icon"></span>
           </button>
-          <div className="offcanvas offcanvas-end w-50" tabIndex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+          <div
+            className="offcanvas offcanvas-end w-50"
+            tabIndex="-1"
+            id="offcanvasNavbar"
+            aria-labelledby="offcanvasNavbarLabel"
+          >
             <div className="offcanvas-header pb-0">
-              <HashLink onClick={scrollTop} smooth={true} to={"/"} className="nav-link">
-                <h5 className="offcanvas-title fw-semibold" id="offcanvasNavbarLabel">
+              <HashLink
+                onClick={formater.scrollTop}
+                smooth={true}
+                to={"/"}
+                className="nav-link"
+              >
+                <h5
+                  className="offcanvas-title fw-semibold"
+                  id="offcanvasNavbarLabel"
+                >
                   BCR
                 </h5>
               </HashLink>
-              <button type="button" className="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+              <button
+                type="button"
+                className="btn-close"
+                data-bs-dismiss="offcanvas"
+                aria-label="Close"
+              ></button>
             </div>
             <div className="offcanvas-body">
               <ul className="navbar-nav justify-content-end flex-grow-1 gap-lg-3 gap-md-3 gap-sm-0">
                 <li className="nav-item">
-                  <HashLink smooth={true} to={"/#our-services"} className="nav-link active" aria-current="page">
+                  <HashLink
+                    smooth={true}
+                    to={"/#our-services"}
+                    className="nav-link active"
+                    aria-current="page"
+                  >
                     Our Services
                   </HashLink>
                 </li>
@@ -45,7 +70,11 @@ const Navbar = () => {
                   </HashLink>
                 </li>
                 <li className="nav-item">
-                  <HashLink smooth={true} to={"/#testimonial"} className="nav-link">
+                  <HashLink
+                    smooth={true}
+                    to={"/#testimonial"}
+                    className="nav-link"
+                  >
                     Testimonial
                   </HashLink>
                 </li>
