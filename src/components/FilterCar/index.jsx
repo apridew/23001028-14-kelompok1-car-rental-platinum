@@ -1,41 +1,32 @@
-import { useEffect, useState } from "react";
 import "./style.css";
-import axios from "axios";
+import { useEffect, useState } from "react";
 import FilterCarCard from "../FilterCarCard";
+import { useDispatch, useSelector } from "react-redux";
+import { getCars } from "../../redux/features/cars/carsSlice";
 
 const FilterCar = () => {
   const [overlayBgOn, setOverlayBgOn] = useState(false);
-  const [carList, setCarList] = useState([]);
+  const [isSubmit, setIsSubmit] = useState(false);
   const [nameCar, setNameCar] = useState("");
   const [categoryCar, setCategoryCar] = useState("");
   const [availableCar, setAvailableCar] = useState(false);
   const [minPrice, setMinPrice] = useState("");
   const [maxPrice, setMaxPrice] = useState("");
-  const [isSubmit, setIsSubmit] = useState(false);
+
+  const { carList, loading } = useSelector((state) => state.cars);
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    handleGetCarList(nameCar, categoryCar, availableCar, minPrice, maxPrice);
-  }, []);
-
-  const handleGetCarList = (
-    inputName,
-    inputCategory,
-    inputAvailable,
-    inputMin,
-    inputMax
-  ) => {
-    axios
-      .get(
-        `https://api-car-rental.binaracademy.org/customer/v2/car?page=1&pageSize=10&name=${inputName}&category=${inputCategory}&isRented=${inputAvailable}&minPrice=${inputMin}&maxPrice=${inputMax}`
-      )
-      .then((res) => {
-        setCarList(res.data.cars);
-        console.log("API Car List", res.data.cars);
+    dispatch(
+      getCars({
+        inputName: nameCar,
+        inputCategory: categoryCar,
+        inputAvailable: availableCar,
+        inputMin: minPrice,
+        inputMax: maxPrice,
       })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
+    );
+  }, []);
 
   const handleNameCar = (e) => {
     setNameCar(e.target.value);
@@ -85,12 +76,28 @@ const FilterCar = () => {
   };
 
   const handleSubmit = () => {
-    handleGetCarList(nameCar, categoryCar, availableCar, minPrice, maxPrice);
+    dispatch(
+      getCars({
+        inputName: nameCar,
+        inputCategory: categoryCar,
+        inputAvailable: availableCar,
+        inputMin: minPrice,
+        inputMax: maxPrice,
+      })
+    );
     setIsSubmit(true);
   };
 
   const handleReset = () => {
-    handleGetCarList("", "", false, "", "");
+    dispatch(
+      getCars({
+        inputName: "",
+        inputCategory: "",
+        inputAvailable: false,
+        inputMin: "",
+        inputMax: "",
+      })
+    );
     setNameCar("");
     setCategoryCar("");
     setAvailableCar(false);
@@ -160,11 +167,7 @@ const FilterCar = () => {
           </div>
           <button
             onClick={() => {
-              if (isSubmit) {
-                handleReset();
-              } else {
-                handleSubmit();
-              }
+              isSubmit ? handleReset() : handleSubmit();
               handleOverlayOff();
             }}
             className={`btn border-0 ${
@@ -177,10 +180,18 @@ const FilterCar = () => {
       </div>
       <div className="container mb-5" id="car-list">
         <div className="row flex-wrap">
-          {carList.length > 0 ? (
-            carList.map((data, id) => <FilterCarCard key={id} all={data} />)
+          {!loading ? (
+            carList.length > 0 ? (
+              carList.map((data, id) => <FilterCarCard key={id} all={data} />)
+            ) : (
+              <h1 className="text-center p-5">Mobil belum tersedia</h1>
+            )
           ) : (
-            <h1 className="text-center p-5">Mobil belum tersedia</h1>
+            <div className="d-flex justify-content-center">
+              <div className="spinner-border" role="status">
+                <span className="visually-hidden"></span>
+              </div>
+            </div>
           )}
         </div>
       </div>
