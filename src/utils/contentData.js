@@ -105,6 +105,7 @@ export const icons = [
   { icon: "bi bi-instagram" },
   { icon: "bi bi-twitter" },
   { icon: "bi bi-envelope" },
+  { icon: "bi bi-twitch" },
 ];
 
 export const responsive = {

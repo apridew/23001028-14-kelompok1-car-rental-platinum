@@ -57,7 +57,7 @@
 
 #car-detail .frame-card {
     max-width: 405px;
-    max-height: 435px;
+    max-height: 530px;
     border-radius: 8px;
     background: white;
     box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.15);
@@ -72,4 +72,115 @@
     display: flex;
     justify-content: space-between;
     align-items: baseline;
+}
+
+.mt-4 {
+    margin: 0 !important;
+}
+
+.calendarInput label {
+    font-family: Rubik;
+    font-size: 12px;
+    font-weight: 300;
+    line-height: 18px;
+}
+
+.calendarInput .inputBox {
+    display: flex;
+    font-size: 14px;
+    padding: 9px 12px;
+    border-radius: 2px;
+    border: 1px solid #5CB85F;
+    width: 339px;
+    height: 36px;
+    gap: 1px;
+}
+
+.calendarInput svg {
+    position: relative;
+    left: 100px;
+    top: 29px;
+    color: #8A8A8A;
+    width: 18px;
+    height: 18px;
+    z-index: 2;
+    cursor: pointer;
+}
+
+.calendarWrap {
+    display: inline-block;
+    position: relative;
+
+}
+
+.rdrMonth {
+    margin-bottom: 2em !important;
+}
+
+
+.rdrDateDisplayWrapper {
+    display: none !important;
+}
+
+.calendarElements {
+    position: absolute;
+    right: -510px;
+    width: 340px;
+    top: 0px;
+    transform: translateX(-50%);
+    z-index: 1;
+    background-color: white;
+    display: flex !important;
+    border-radius: 4px;
+    border: 0px solid rgba(0, 0, 0, 0.30);
+    background: #FFF;
+    box-shadow: 0px 4px 12px 0px rgba(0, 0, 0, 0.10);
+
+}
+
+.calendarButton {
+    position: absolute;
+    top: 310px;
+    z-index: 1;
+    left: 20px;
+}
+
+.calendarButton button {
+    display: flex;
+    width: 300px;
+    padding: 8px 12px;
+    justify-content: center;
+    font-size: 14px;
+    font-weight: 700;
+    color: white;
+    align-items: center;
+    gap: 10px;
+    flex: 1 0 0;
+    border: none;
+    border-radius: 2px;
+    background: #35B0A7;
+}
+
+.button {
+    display: flex;
+    width: 358px;
+    padding: 8px 12px;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    border: none;
+    border-radius: 2px;
+    background: #5CB85F;
+    color: #FFF;
+    font-size: 14px;
+    font-weight: 700;
+    line-height: 20px;
+}
+
+.button:hover {
+    background: #47964a;
+}
+
+.button:disabled {
+    background: #35B0A733;
 }
