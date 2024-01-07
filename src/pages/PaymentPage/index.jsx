@@ -1,5 +1,9 @@
 const PaymentPage = () => {
-  return <div>index</div>;
+  return (
+    <div>
+      <h1>PaymentPage</h1>
+    </div>
+  );
 };
 
 export default PaymentPage;
