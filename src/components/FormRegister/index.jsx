@@ -22,15 +22,28 @@ const FormRegister = () => {
   };
 
   const handleSubmit = async () => {
+    if (!form.email || !form.password) {
+      setError("Data harus diisi tidak boleh kosong!");
+      return;
+    }
     try {
       await registerCustomer(form);
-      setSuccess("Registrasi berhasil, silahkan login !");
+      setSuccess("Registrasi berhasil, silahkan login!");
       setTimeout(() => {
         navigate("/sign-in");
       }, 2000);
     } catch (error) {
-      console.log(error.response.data);
-      setError("Isi data dengan lengkap !");
+      console.log(error.response.data.errors[0].message);
+      if (error.response.data.message == "Email Already exists.") {
+        setError("Email Anda sudah terdaftar, silahkan login!");
+      } else if (
+        error.response.data.errors[0].message ==
+        "Validation isEmail on email failed"
+      ) {
+        setError("Harap isi dengan format email yang benar!");
+      } else {
+        setError("Password harus minimal 6 karakter");
+      }
     }
   };
 
@@ -47,9 +60,13 @@ const FormRegister = () => {
 
               <div className="form d-flex gap-2 flex-column my-5">
                 {success && (
-                  <div className="alert alert-success">{success}</div>
+                  <div className="alert alert-success border-0">{success}</div>
                 )}
-                {error && <div className="alert alert-danger">{error}</div>}
+                {error && (
+                  <div className="alert alert-danger border-0 text-danger">
+                    {error}
+                  </div>
+                )}
                 <label className="form-label">Name*</label>
                 <input
                   type="text"
