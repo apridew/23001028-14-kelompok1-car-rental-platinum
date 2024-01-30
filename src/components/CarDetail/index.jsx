@@ -97,6 +97,7 @@ const CarDetail = () => {
     console.log('Input Value:', inputValue);
     // navigate('/payment')
     alert("success");
+
   }
 
 
@@ -199,6 +200,7 @@ const CarDetail = () => {
                         moveRangeOnFirstSelection={false}
                         ranges={range}
                         months={1}
+                        minDate={new Date()}
                         direction="horizontal"
                         className="calendarElements"
                         rangeColors={["#35B0A7"]}
