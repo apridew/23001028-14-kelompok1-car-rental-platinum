@@ -7,9 +7,9 @@ import * as formater from "../../helpers/formaters";
 import format from "date-fns/format";
 import { DateRange } from "react-date-range";
 import addDays from "date-fns/addDays";
-import * as icon from "react-feather"
-import 'react-date-range/dist/styles.css';
-import 'react-date-range/dist/theme/default.css'
+import * as icon from "react-feather";
+import "react-date-range/dist/styles.css";
+import "react-date-range/dist/theme/default.css";
 
 const CarDetail = () => {
   const [carDetail, setCarDetail] = useState({});
@@ -18,8 +18,8 @@ const CarDetail = () => {
     {
       startDate: addDays(new Date(), 1),
       endDate: addDays(new Date(), 7),
-      key: 'selection'
-    }
+      key: "selection",
+    },
   ]);
   const [open, setOpen] = useState(false);
   const [price, setPrice] = useState(0);
@@ -28,7 +28,7 @@ const CarDetail = () => {
   // console.log("Input Value:", inputValue);
   const param = useParams();
   const refOne = useRef(null);
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   useEffect(() => {
     handleGetCarDetail();
@@ -49,7 +49,7 @@ const CarDetail = () => {
   useEffect(() => {
     document.addEventListener("keydown", hideOnEscape, true);
     document.addEventListener("click", hideOnClickOutside, true);
-  }, [])
+  }, []);
 
   const hideOnEscape = (e) => {
     console.log(e.key);
@@ -62,14 +62,14 @@ const CarDetail = () => {
     if (refOne.current && !refOne.current.contains(e.target)) {
       setOpen(false);
     }
-  }
+  };
   const formatDateToMonthName = (date) => {
     return format(date, "dd MMMM yyyy");
   };
 
 
   const handleButton = () => {
-    console.log('Selected Range:', range[0]);
+    console.log("Selected Range:", range[0]);
     setOpen(false);
 
     if (range[0].startDate && range[0].endDate) {
@@ -77,8 +77,8 @@ const CarDetail = () => {
         {
           startDate: range[0].startDate,
           endDate: range[0].endDate,
-          key: 'selection'
-        }
+          key: "selection",
+        },
       ]);
 
       const totalDays = Math.ceil((range[0].endDate - range[0].startDate) / (1000 * 60 * 60 * 24));
@@ -99,7 +99,7 @@ const CarDetail = () => {
       }
       // console.log(totalPrice);
     }
-  }
+  };
 
   const handleSubmit = async () => {
     console.log('Input Value:', inputValue);
@@ -209,8 +209,7 @@ const CarDetail = () => {
                 </h6>
 
                 <div className="calendarInput">
-                  {!inputValue && <span className="input-error" style={{display: error ? "block" : "none"}}>{error}</span>}
-
+                  {!inputValue && <span className="input-error" style={{ display: error ? "block" : "none" }}>{error}</span>}
                   <label htmlFor="info">Tentukan lama sewa mobil (max. 7 hari)</label>
                   <icon.Calendar onClick={() => setOpen(open => !open)} />
                   <input
@@ -219,16 +218,16 @@ const CarDetail = () => {
                     className="inputBox"
                     placeholder="Pilih tanggal mulai dan tanggal akhir sewa"
                     value={inputValue}
-                    onClick={() => setOpen(open => !open)}
+                    onClick={() => setOpen((open) => !open)}
                     style={{ fontSize: "14px" }}
                   />
                 </div>
 
-                <div className="calendarWrap" ref={refOne} >
+                <div className="calendarWrap" ref={refOne}>
                   {open && (
                     <>
                       <DateRange
-                        onChange={item => setRange([item.selection])}
+                        onChange={(item) => setRange([item.selection])}
                         editableDateInputs={true}
                         moveRangeOnFirstSelection={false}
                         ranges={range}
@@ -239,7 +238,6 @@ const CarDetail = () => {
                         className="calendarElements"
                         rangeColors={["#35B0A7"]}
                         showMonthAndYearPickers={true}
-
                       />
                       <div className="calendarButton">
                         <button onClick={handleButton}>Pilih Tanggal</button>
@@ -254,10 +252,12 @@ const CarDetail = () => {
                 </div>
 
                 <button
-                  className={`button ${!inputValue ? '' : `disabled`}`}
+                  className={`button ${!inputValue ? "" : "disabled"}`}
                   onClick={handleSubmit}
                   disabled={!inputValue}
-                >Lanjutkan Pembayaran</button>
+                >
+                  Lanjutkan Pembayaran
+                </button>
               </div>
             </div>
           </div>
