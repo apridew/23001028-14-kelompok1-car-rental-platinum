@@ -10,6 +10,7 @@ const PaymentDetail = () => {
   const [carDetail, setCarDetail] = useState({});
   const [orderData, setOrderData] = useState({});
   const [noImage, setNoImage] = useState(true);
+  const [isConfirm, setIsConfirm] = useState(false);
   const [image, setImage] = useState(null);
   const [preview, setPreview] = useState(null);
 
@@ -91,6 +92,10 @@ const PaymentDetail = () => {
     console.log(event.target.files[0]);
   };
 
+  const confimationPayment = () => {
+    setIsConfirm(true);
+  };
+
   return (
     <>
       {/* Header Payment Step */}
@@ -143,58 +148,69 @@ const PaymentDetail = () => {
         </div>
 
         {/* Right Content */}
-        <div className="col-4 h-100 p-0 content-right d-flex justify-content-center justify-content-lg-end">
-          <div className="frame-card">
-            <div className="d-flex justify-content-between align-items-center">
-              <h5 className="fs-6">Konfirmasi Pembayaran</h5>
-              <CountDown showHours={false} minutes={9} seconds={59} />
-            </div>
-            <p>
-              Terima kasih telah melakukan konfirmasi pembayaran. Pembayaranmu
-              akan segera kami cek tunggu kurang lebih 10 menit untuk
-              mendapatkan konfirmasi.
-            </p>
-            <div className="d-flex flex-column justify-content-center pt-4">
-              <p className="fs-6">Upload Bukti Pembayaran</p>
-              <p>
-                Untuk membantu kami lebih cepat melakukan pengecekan. Kamu bisa
-                upload bukti bayarmu
-              </p>
-
-              <input
-                onChange={handleImage}
-                type="file"
-                name="slip"
-                id="slip"
-                accept="image/*"
-              />
-              <label
-                htmlFor="slip"
-                className="d-flex justify-content-center align-items-center mb-4 "
-                role="button"
-              >
-                {image ? (
-                  <div className="upload-slip d-flex justify-content-center align-items-center">
-                    <img src={preview} alt="upload" />
-                  </div>
-                ) : (
-                  <div className="upload-slip d-flex justify-content-center align-items-center">
-                    <i className="bi bi-image text-dark fs-4 "></i>
-                  </div>
-                )}
-              </label>
-            </div>
-
-            {!noImage && (
-              <div className="pop-up-payment card text-center p-1 bg-danger-subtle text-danger mb-3">
-                Masukan gambar terlebih dahulu!
+        {isConfirm ? (
+          <div className="col-4 h-100 p-0 content-right d-flex justify-content-center justify-content-lg-end">
+            <div className="frame-card">
+              <div className="d-flex justify-content-between align-items-center">
+                <h5 className="fs-6">Konfirmasi Pembayaran</h5>
+                <CountDown showHours={false} minutes={9} seconds={59} />
               </div>
-            )}
-            <button onClick={handleUpload} className="button">
-              {image ? "Konfirmasi" : "Upload"}
+              <p>
+                Terima kasih telah melakukan konfirmasi pembayaran. Pembayaranmu
+                akan segera kami cek tunggu kurang lebih 10 menit untuk
+                mendapatkan konfirmasi.
+              </p>
+              <div className="d-flex flex-column justify-content-center pt-4">
+                <p className="fs-6">Upload Bukti Pembayaran</p>
+                <p>
+                  Untuk membantu kami lebih cepat melakukan pengecekan. Kamu
+                  bisa upload bukti bayarmu
+                </p>
+
+                <input
+                  onChange={handleImage}
+                  type="file"
+                  name="slip"
+                  id="slip"
+                  accept="image/*"
+                />
+                <label
+                  htmlFor="slip"
+                  className="d-flex justify-content-center align-items-center mb-4 "
+                  role="button"
+                >
+                  {image ? (
+                    <div className="upload-slip d-flex justify-content-center align-items-center">
+                      <img src={preview} alt="upload" />
+                    </div>
+                  ) : (
+                    <div className="upload-slip d-flex justify-content-center align-items-center">
+                      <i className="bi bi-image text-dark fs-4 "></i>
+                    </div>
+                  )}
+                </label>
+              </div>
+
+              {!noImage && (
+                <div className="pop-up-payment card text-center p-1 bg-danger-subtle text-danger mb-3">
+                  Masukan gambar terlebih dahulu!
+                </div>
+              )}
+              <button onClick={handleUpload} className="button">
+                {image ? "Konfirmasi" : "Upload"}
+              </button>
+            </div>
+          </div>
+        ) : (
+          <div className="frame-card col-4 h-100 content-right d-flex flex-column justify-content-center justify-content-lg-end">
+            <p>
+              Klik konfirmasi pembayaran untuk mempercepat proses pengecekan
+            </p>
+            <button onClick={confimationPayment} className="button">
+              Konfirmasi Pembayaran
             </button>
           </div>
-        </div>
+        )}
       </div>
     </>
   );
