@@ -102,7 +102,7 @@
   background: #35b0a733;
 }
 
-.accordion-button::after {
+#order-payment .accordion-button::after {
   position: absolute;
   top: 0;
   left: 15%;
