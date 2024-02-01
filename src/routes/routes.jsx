@@ -2,6 +2,7 @@ import DetailCarPage from "../pages/DetailCarPage";
 import LandingPage from "../pages/LandingPage";
 import NotFound from "../pages/NotFound";
 import PaymentPage from "../pages/PaymentPage";
+import PaymentUploadPage from "../pages/PaymentUploadPage copy";
 import RegisterPage from "../pages/RegisterPage";
 import SearchCarPage from "../pages/SearchCarPage";
 import SignInPage from "../pages/SignInPage";
@@ -28,8 +29,12 @@ export const routes = [
     element: <DetailCarPage />,
   },
   {
-    path: "/payment",
+    path: "/payment/:id",
     element: <PaymentPage />,
+  },
+  {
+    path: "/payment/:id/:bank",
+    element: <PaymentUploadPage />,
   },
   {
     path: "*",

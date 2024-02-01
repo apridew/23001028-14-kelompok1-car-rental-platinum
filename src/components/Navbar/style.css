@@ -39,7 +39,7 @@ a.nav-link {
 }
 
 .navbar-nav > li:last-child {
-  padding-right: 110px !important;
+  padding-right: 90px !important;
 }
 
 @media screen and (min-width: 1025px) and (max-width: 1600px) {
@@ -69,5 +69,13 @@ a.nav-link {
 
   nav {
     z-index: 11 !important;
+  }
+}
+
+@media (min-width: 992px) {
+  .navbar-expand-lg .navbar-nav {
+    flex-direction: row;
+    height: 50px;
+    align-items: center;
   }
 }

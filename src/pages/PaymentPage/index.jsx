@@ -1,9 +1,14 @@
+import Navbar from "../../components/Navbar";
+import Footer from "../../components/Footer";
+import OrderDetail from "../../components/OrderDetail";
+
 const PaymentPage = () => {
   return (
-    <div>
-      <h1>PaymentPage</h1>
-    </div>
+    <>
+      <Navbar />
+      <OrderDetail />
+      <Footer />
+    </>
   );
 };
-
 export default PaymentPage;

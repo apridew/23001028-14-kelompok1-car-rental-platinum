@@ -125,3 +125,18 @@ export const responsive = {
     slidesToSlide: 1,
   },
 };
+
+export const banksTransfer = [
+  {
+    name: "BCA",
+    desc: "BCA Transfer",
+  },
+  {
+    name: "BNI",
+    desc: "BNI Transfer",
+  },
+  {
+    name: "Mandiri",
+    desc: "Mandiri Transfer",
+  },
+];

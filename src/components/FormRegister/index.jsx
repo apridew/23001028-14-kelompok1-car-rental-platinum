@@ -33,7 +33,7 @@ const FormRegister = () => {
         navigate("/sign-in");
       }, 2000);
     } catch (error) {
-      console.log(error.response.data.errors[0].message);
+      // console.log(error.response.data.errors[0].message);
       if (error.response.data.message == "Email Already exists.") {
         setError("Email Anda sudah terdaftar, silahkan login!");
       } else if (

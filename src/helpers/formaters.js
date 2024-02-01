@@ -51,6 +51,95 @@ export const dataCarFormater = (name, category, price, status) => {
   return dataCarDetail;
 };
 
+export const dateFormater = (inputDate) => {
+  const date = new Date(inputDate);
+  const months = [
+    "Januari",
+    "Februari",
+    "Maret",
+    "April",
+    "Mei",
+    "Juni",
+    "Juli",
+    "Agustus",
+    "September",
+    "Oktober",
+    "November",
+    "Desember",
+  ];
+
+  const currentDate = date.getDate();
+  const month = months[date.getMonth()];
+  const year = date.getFullYear();
+
+  const dateFormated = `${currentDate} ${month} ${year}`;
+  return dateFormated;
+};
+
+export const daysRentFormatter = (startDate, finishDate) => {
+  const startRentAt = new Date(startDate);
+  const finishRentAt = new Date(finishDate);
+
+  const differenceMs = finishRentAt.getTime() - startRentAt.getTime();
+
+  const differenceDays = differenceMs / (1000 * 60 * 60 * 24);
+
+  const daysRent = Math.floor(differenceDays);
+
+  return daysRent;
+};
+
+export const orderCarFormatter = (name, category, start, end) => {
+  const dataCarDetail = [
+    {
+      title: "Nama/Tipe Mobil",
+      content: name,
+    },
+    {
+      title: "Kategori",
+      content: category,
+    },
+    {
+      title: "Tanggal Mulai Sewa",
+      content: dateFormater(start),
+    },
+    {
+      title: "Tanggal Akhir Sewa",
+      content: dateFormater(end),
+    },
+  ];
+
+  return dataCarDetail;
+};
+
 export const scrollTop = () => {
   return window.scrollTo(0, 0);
+};
+
+export const getTomorrowDate = () => {
+  const today = new Date();
+  const tomorrow = new Date(
+    today.getFullYear(),
+    today.getMonth(),
+    today.getDate() + 1
+  );
+
+  const hours = today.getHours();
+  const minutes = today.getMinutes();
+
+  tomorrow.setHours(hours);
+  tomorrow.setMinutes(minutes);
+
+  const options = {
+    weekday: "long",
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+    hour: "numeric",
+    minute: "numeric",
+    hour12: false,
+    timeZone: "Asia/Jakarta",
+  };
+
+  return tomorrow.toLocaleDateString("id-ID", options);
 };
