@@ -1,0 +1,72 @@
+#payment-slip {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+#payment-slip .row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 3rem;
+  margin: 0;
+  padding: 0;
+}
+
+#payment-slip .content-left {
+  padding: 24px;
+  border-radius: 8px;
+  box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.15);
+  height: 100%;
+  width: 100%;
+}
+
+#payment-slip span {
+  font-size: 12px;
+  padding-right: 2px;
+}
+
+#payment-slip h6 {
+  color: #8a8a8a;
+  font-size: 10px;
+  font-weight: 700;
+  line-height: 14px;
+}
+
+#payment-slip .content-left p {
+  color: #000;
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 20px;
+  margin: 0;
+  padding-bottom: 16px;
+}
+
+#payment-slip p.include {
+  color: #5cb85f;
+  font-size: 14px;
+  line-height: 20px;
+  margin: 0;
+  padding-bottom: 16px;
+}
+
+#payment-slip .content-card-top p:first-of-type {
+  color: #000;
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 20px;
+  padding-bottom: 3px;
+}
+
+.banks .card {
+  width: 87px;
+}
+
+.banks .border-2 {
+  width: 30%;
+}
+
+.copy-text {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+}

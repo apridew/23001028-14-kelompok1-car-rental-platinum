@@ -95,9 +95,36 @@ const CarDetail = () => {
     }
   };
 
-  const handleSubmit = () => {
-    console.log("Input Value:", inputValue);
-    navigate("/payment");
+  const handleSubmit = async () => {
+    try {
+      const data = {
+        start_rent_at: "2024-01-05",
+        finish_rent_at: "2024-01-11",
+        car_id: carDetail.id,
+      };
+
+      const token =
+        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQGJjci5pbyIsInJvbGUiOiJBZG1pbiIsImlhdCI6MTY2NTI0MjUwOX0.ZTx8L1MqJ4Az8KzoeYU2S614EQPnqk6Owv03PUSnkzc";
+
+      const config = {
+        headers: {
+          access_token: token,
+        },
+      };
+
+      const res = await axios.post(
+        `https://api-car-rental.binaracademy.org/customer/order`,
+        data,
+        config
+      );
+      console.log(res);
+
+      setTimeout(() => {
+        navigate(`/payment/${res.data.id}`);
+      }, 1000);
+    } catch (error) {
+      console.log(error.response.data);
+    }
   };
 
   return (
