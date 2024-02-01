@@ -1,12 +1,17 @@
 import "./style.css";
 import { Link } from "react-router-dom";
 import * as formater from "../../helpers/formaters";
+import noimage from "../../assets/img/search-car/no-image.jpg";
 
 const FilterCarCard = (props) => {
   return (
     <>
       <div className="col-lg-4 col-sm-12 frame-card">
-        <img className="img-fluid" src={props.all.image} alt={props.all.name} />
+        <img
+          className="img-fluid"
+          src={props.all.image || noimage}
+          alt={props.all.name}
+        />
         <div className="card-content">
           <p>{props.all.name}</p>
           <h5>{formater.idrFormater(props.all.price)} /hari</h5>

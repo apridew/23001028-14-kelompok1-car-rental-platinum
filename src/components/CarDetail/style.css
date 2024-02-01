@@ -17,7 +17,7 @@
   min-width: 336px;
 }
 
-#car-detail span {
+#car-detail span:first-child {
   font-size: 12px;
   padding-right: 2px;
 }
@@ -181,4 +181,14 @@
 
 .button:disabled {
   background: #35b0a733;
+}
+
+.calendarInput span {
+  color: #d00c1a;
+  background: rgba(208, 12, 26, 0.1);
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 18px;
+  width: 60%;
+  padding: 2px 6px;
 }
