@@ -1,8 +1,10 @@
 import DetailCarPage from "../pages/DetailCarPage";
+import EtiketPaymentPage from "../pages/EtiketPaymentPage";
 import LandingPage from "../pages/LandingPage";
 import NotFound from "../pages/NotFound";
 import PaymentPage from "../pages/PaymentPage";
 import PaymentUploadPage from "../pages/PaymentUploadPage";
+import PdfPreviewPage from "../pages/PdfPreviewPage";
 import RegisterPage from "../pages/RegisterPage";
 import SearchCarPage from "../pages/SearchCarPage";
 import SignInPage from "../pages/SignInPage";
@@ -35,6 +37,14 @@ export const routes = [
   {
     path: "/payment/:id/:bank",
     element: <PaymentUploadPage />,
+  },
+  {
+    path: "/payment/:id/etiket",
+    element: <EtiketPaymentPage />,
+  },
+  {
+    path: "/payment/:id/pdf",
+    element: <PdfPreviewPage />,
   },
   {
     path: "*",

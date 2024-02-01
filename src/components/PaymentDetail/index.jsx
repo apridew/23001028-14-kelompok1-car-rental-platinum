@@ -67,6 +67,9 @@ const PaymentDetail = () => {
       )
       .then((res) => {
         console.log("API Upload Slip", res);
+        setTimeout(() => {
+          navigate(`/payment/${id}/etiket`);
+        }, 1000);
       })
       .catch((err) => {
         console.log(err.response.data);
