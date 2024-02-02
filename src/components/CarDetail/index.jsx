@@ -94,9 +94,17 @@ const CarDetail = () => {
   }
 
   const handleSubmit = () => {
-    console.log('Input Value:', inputValue);
-    // navigate('/payment')
-    alert("success");
+    const token = localStorage.getItem("accesToken");
+    if (token !== null && token !== undefined) {
+      console.log('Input Value:', inputValue);
+      navigate('/payment')
+      alert("success");
+
+    } else {
+      alert("Anda belum Login : Anda Akan diarahkan ke Halaman Login");
+        localStorage.setItem("redirectPath", window.location.pathname);
+        navigate("/sign-in");
+    }
 
   }
 
