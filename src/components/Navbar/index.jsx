@@ -22,9 +22,7 @@ const Navbar = () => {
         dispatch(setLoggedOut());
       }, 2000);
     } else {
-      setTimeout(() => {
-        navigate("/register");
-      }, 1000);
+      navigate("/register");
     }
   };
 

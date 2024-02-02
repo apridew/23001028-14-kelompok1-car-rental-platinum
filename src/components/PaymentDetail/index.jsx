@@ -5,6 +5,8 @@ import axios from "axios";
 import * as formater from "../../helpers/formaters";
 import CountDown from "../CountDown";
 import PaymentSlip from "../PaymentSlip";
+import { useDispatch, useSelector } from "react-redux";
+import { setLoading, clearLoading } from "../../redux/features/auth/authSlice";
 
 const PaymentDetail = () => {
   const [carDetail, setCarDetail] = useState({});
@@ -13,6 +15,8 @@ const PaymentDetail = () => {
   const [isConfirm, setIsConfirm] = useState(false);
   const [image, setImage] = useState(null);
   const [preview, setPreview] = useState(null);
+  const dispatch = useDispatch();
+  const isLoading = useSelector((state) => state.auth.loading);
 
   let { id, bank } = useParams();
   const navigate = useNavigate();
@@ -66,9 +70,15 @@ const PaymentDetail = () => {
         config
       )
       .then((res) => {
+        formater.scrollTop;
         console.log("API Upload Slip", res);
         setTimeout(() => {
           navigate(`/payment/${id}/etiket`);
+        }, 1000);
+        dispatch(setLoading());
+
+        setTimeout(() => {
+          dispatch(clearLoading());
         }, 1000);
       })
       .catch((err) => {
@@ -201,8 +211,22 @@ const PaymentDetail = () => {
                   Masukan gambar terlebih dahulu!
                 </div>
               )}
-              <button onClick={handleUpload} className="button">
-                {image ? "Konfirmasi" : "Upload"}
+              <button
+                onClick={handleUpload}
+                className="button"
+                disabled={isLoading}
+              >
+                {image ? (
+                  isLoading ? (
+                    <div className="spinner-border" role="status">
+                      <span className="visually-hidden"></span>
+                    </div>
+                  ) : (
+                    "Konfirmasi"
+                  )
+                ) : (
+                  "Upload"
+                )}
               </button>
             </div>
           </div>

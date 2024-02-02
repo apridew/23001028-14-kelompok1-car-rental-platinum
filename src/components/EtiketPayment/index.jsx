@@ -20,8 +20,7 @@ const EtiketPayment = () => {
   }, []);
 
   const handleGetOrderDetail = async () => {
-    const token =
-      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQGJjci5pbyIsInJvbGUiOiJBZG1pbiIsImlhdCI6MTY2NTI0MjUwOX0.ZTx8L1MqJ4Az8KzoeYU2S614EQPnqk6Owv03PUSnkzc";
+    const token = localStorage.getItem("token");
     const config = {
       headers: {
         access_token: token,
@@ -55,8 +54,7 @@ const EtiketPayment = () => {
   };
 
   const handlePreviewPDF = () => {
-    navigate(`/payment/${id}/pdf`);
-    window.open(url, "_blank");
+    window.open(`/payment/${id}/pdf`, "_blank");
   };
 
   return (
