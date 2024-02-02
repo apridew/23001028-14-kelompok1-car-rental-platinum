@@ -1,7 +1,9 @@
+import FormLogIn from "../../components/FormLogIn";
+
 const SignInPage = () => {
   return (
     <div>
-      <h1>SignInPage</h1>
+      <FormLogIn />
     </div>
   );
 };
