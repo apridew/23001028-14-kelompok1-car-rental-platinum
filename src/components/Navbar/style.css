@@ -27,7 +27,7 @@ nav a:first-child:hover {
   color: var(--blue-primary);
 }
 
-nav li a:hover {
+nav .nav-item:hover {
   color: var(--blue-primary);
   border-bottom: 1px solid var(--blue-primary);
 }
@@ -40,6 +40,20 @@ a.nav-link {
 
 .navbar-nav > li:last-child {
   padding-right: 90px !important;
+}
+
+.button-sign-out button {
+  background-color: var(--green-lime);
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 20px;
+  padding: 8px 12px;
+  border-radius: 2px;
+  max-width: 150px;
+
+  &:hover {
+    opacity: 85%;
+  }
 }
 
 @media screen and (min-width: 1025px) and (max-width: 1600px) {
@@ -69,6 +83,14 @@ a.nav-link {
 
   nav {
     z-index: 11 !important;
+  }
+
+  .button-sign-out {
+    margin-top: 10px;
+  }
+
+  .nav-item {
+    margin-bottom: 3px;
   }
 }
 
