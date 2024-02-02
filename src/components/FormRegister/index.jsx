@@ -3,9 +3,14 @@ import banner from "../../assets/img/auth/banner-auth.png";
 import "./style.css";
 import { Link, useNavigate } from "react-router-dom";
 import { registerCustomer } from "../../helpers/apis";
+import { useDispatch, useSelector } from "react-redux";
+import { setLoading, clearLoading } from "../../redux/features/auth/authSlice";
 
 const FormRegister = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const isLoading = useSelector((state) => state.auth.loading);
+
   const [form, setForm] = useState({
     email: "",
     password: "",
@@ -31,6 +36,11 @@ const FormRegister = () => {
       setSuccess("Registrasi berhasil, silahkan login!");
       setTimeout(() => {
         navigate("/sign-in");
+      }, 1000);
+      dispatch(setLoading());
+
+      setTimeout(() => {
+        dispatch(clearLoading());
       }, 2000);
     } catch (error) {
       // console.log(error.response.data.errors[0].message);
@@ -92,8 +102,15 @@ const FormRegister = () => {
                 <button
                   onClick={handleSubmit}
                   className="btn btn-primary btn-sign mt-3"
+                  disabled={isLoading}
                 >
-                  Sign Up
+                  {isLoading ? (
+                    <div className="spinner-border" role="status">
+                      <span className="visually-hidden"></span>
+                    </div>
+                  ) : (
+                    "Sign In"
+                  )}
                 </button>
               </div>
               <p className="fw-semibold bottom-content">
