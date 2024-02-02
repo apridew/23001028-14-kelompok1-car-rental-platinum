@@ -4,7 +4,7 @@
   background: #f1f3ff;
 }
 
-#car-detail-result p {
+#order-detail p {
   margin-bottom: 0px;
   padding-bottom: 0px;
   padding-top: 3px;
@@ -15,11 +15,11 @@
   line-height: 18px;
 }
 
-#car-detail-result i {
+#order-detail i {
   color: #5753534f;
 }
 
-#car-detail-result h5 {
+#order-detail h5 {
   color: #000;
   font-family: Arial, Helvetica, sans-serif;
   font-size: 14px;
@@ -27,7 +27,7 @@
   line-height: 20px;
 }
 
-.wrapper-car-detail-result {
+.wrapper-order-detail {
   position: relative;
   top: -60px;
   border-radius: 8px;
@@ -35,22 +35,38 @@
   box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.15);
   padding: 24px;
   margin: 30px auto;
-  max-width: 80%;
-}
-
-.box-data {
-  min-height: 36px;
-  min-width: 238px;
-  display: flex;
-  justify-content: space-between;
-  padding: 9px 12px;
-  align-items: center;
-  gap: 8px;
-  border-radius: 2px;
-  border: 1px solid #d0d0d0;
-  background: #d0d0d0;
 }
 
 .box-data p {
   font-weight: 500 !important;
+}
+
+.right-header i {
+  content: url("../../assets/img/payment/line.png");
+}
+
+.right-header p {
+  margin: 0;
+}
+
+.bg-blue {
+  background-color: #0d28a6;
+  color: #fff;
+}
+
+.border-blue {
+  border: 1px solid #0d28a6;
+  color: #000;
+}
+
+.wrpper-all-order {
+  max-width: 80%;
+  margin: auto;
+}
+
+.header-top-order {
+  height: 100%;
+  width: 83%;
+  margin: auto;
+  flex-wrap: wrap;
 }

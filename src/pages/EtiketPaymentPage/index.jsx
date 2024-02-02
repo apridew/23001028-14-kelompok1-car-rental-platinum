@@ -1,14 +1,14 @@
 import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
-import OrderDetail from "../../components/OrderDetail";
+import EtiketPayment from "../../components/EtiketPayment";
 
-const PaymentPage = () => {
+const EtiketPaymentPage = () => {
   return (
     <>
       <Navbar />
-      <OrderDetail />
+      <EtiketPayment />
       <Footer />
     </>
   );
 };
-export default PaymentPage;
+export default EtiketPaymentPage;

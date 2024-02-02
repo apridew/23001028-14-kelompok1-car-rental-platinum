@@ -23,7 +23,7 @@ const CarDetail = () => {
   ]);
   const [open, setOpen] = useState(false);
   const [price, setPrice] = useState(0);
-  const [inputValue, setInputValue] = useState('');
+  const [inputValue, setInputValue] = useState("");
   const [error, setError] = useState("");
   // console.log("Input Value:", inputValue);
   const param = useParams();
@@ -67,7 +67,6 @@ const CarDetail = () => {
     return format(date, "dd MMMM yyyy");
   };
 
-
   const handleButton = () => {
     console.log("Selected Range:", range[0]);
     setOpen(false);
@@ -81,7 +80,9 @@ const CarDetail = () => {
         },
       ]);
 
-      const totalDays = Math.ceil((range[0].endDate - range[0].startDate) / (1000 * 60 * 60 * 24));
+      const totalDays = Math.ceil(
+        (range[0].endDate - range[0].startDate) / (1000 * 60 * 60 * 24)
+      );
       console.log("Total Days:", totalDays);
 
       if (totalDays > 7) {
@@ -102,41 +103,49 @@ const CarDetail = () => {
   };
 
   const handleSubmit = async () => {
-    console.log('Input Value:', inputValue);
+    console.log("Input Value:", inputValue);
 
     try {
       const data = {
-        "start_rent_at": range[0].startDate,
-        "finish_rent_at": range[0].endDate,
-        "car_id": carDetail.id,
+        start_rent_at: range[0].startDate,
+        finish_rent_at: range[0].endDate,
+        car_id: carDetail.id,
       };
       // console.log("Data:", data)
 
-      const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQGJjci5pbyIsInJvbGUiOiJBZG1pbiIsImlhdCI6MTcwNjc1MzQ0NX0.jPvYk2i9vZNrPKq5gy6xxlfhAZNALVINO5sMYoaJOiI"
+      const token = localStorage.getItem("token");
 
       const config = {
         headers: {
-          access_token: token
-        }
-      }
+          access_token: token,
+        },
+      };
 
-      const ress = await axios.post(`https://api-car-rental.binaracademy.org/customer/order`, data, config)
-      console.log("Custom Order:", ress.data)
+      const ress = await axios.post(
+        `https://api-car-rental.binaracademy.org/customer/order`,
+        data,
+        config
+      );
+      console.log("Custom Order:", ress.data);
 
       setTimeout(() => {
-        navigate(`/payment/${ress.data.id}`)
-      }, 1000)
+        formater.scrollTop();
+        navigate(`/payment/${ress.data.id}`);
+      }, 1000);
     } catch (error) {
       console.log(error.response.data);
+      localStorage.setItem("redirectPath", `/detail-car/${carDetail.id}`);
+      setTimeout(() => {
+        navigate("/sign-in");
+      }, 1000);
     }
-  }
-
+  };
 
   return (
     <>
       <div className="container mb-5" id="car-detail">
         <div className="row">
-          <div className="col content-left">
+          <div className="col content-left h-100">
             <p>Tentang Paket</p>
             <p>Include</p>
             <ul>
@@ -209,9 +218,18 @@ const CarDetail = () => {
                 </h6>
 
                 <div className="calendarInput">
-                  {!inputValue && <span className="input-error" style={{ display: error ? "block" : "none" }}>{error}</span>}
-                  <label htmlFor="info">Tentukan lama sewa mobil (max. 7 hari)</label>
-                  <icon.Calendar onClick={() => setOpen(open => !open)} />
+                  {!inputValue && (
+                    <span
+                      className="input-error"
+                      style={{ display: error ? "block" : "none" }}
+                    >
+                      {error}
+                    </span>
+                  )}
+                  <label htmlFor="info">
+                    Tentukan lama sewa mobil (max. 7 hari)
+                  </label>
+                  <icon.Calendar onClick={() => setOpen((open) => !open)} />
                   <input
                     id="info"
                     readOnly

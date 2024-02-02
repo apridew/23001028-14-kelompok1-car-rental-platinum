@@ -2,9 +2,16 @@ import { Link } from "react-router-dom";
 import "./style.css";
 import { HashLink } from "react-router-hash-link";
 import * as formater from "../../helpers/formaters";
-import Button from "../Button";
 
 const Navbar = () => {
+  const token = localStorage.getItem("token");
+
+  const handleButton = () => {
+    if (token) {
+      localStorage.removeItem("token");
+    }
+  };
+
   return (
     <header>
       <nav className="navbar navbar-expand-lg fixed-top">
@@ -85,7 +92,23 @@ const Navbar = () => {
                   </HashLink>
                 </li>
                 <li>
-                  <Button link="/register" name="Register" />
+                  <div className="button-sign-out">
+                    <Link
+                      onClick={handleButton || formater.scrollTop}
+                      to={`${!token ? "/register" : "/sign-in"}`}
+                    >
+                      <button
+                        type="button"
+                        className={`${
+                          token
+                            ? "btn btn-success border-0 hidden-button bg-danger"
+                            : "btn btn-success border-0 hidden-button"
+                        }`}
+                      >
+                        {`${token ? "Sign Out" : "Register"}`}
+                      </button>
+                    </Link>
+                  </div>
                 </li>
               </ul>
             </div>

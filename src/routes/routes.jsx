@@ -1,7 +1,12 @@
+import AuthRoute from "../hoc/AuthRoute";
+import ProtectedRoute from "../hoc/ProtectedRoute";
 import DetailCarPage from "../pages/DetailCarPage";
+import EtiketPaymentPage from "../pages/EtiketPaymentPage";
 import LandingPage from "../pages/LandingPage";
 import NotFound from "../pages/NotFound";
 import PaymentPage from "../pages/PaymentPage";
+import PaymentUploadPage from "../pages/PaymentUploadPage";
+import PdfPreviewPage from "../pages/PdfPreviewPage";
 import RegisterPage from "../pages/RegisterPage";
 import SearchCarPage from "../pages/SearchCarPage";
 import SignInPage from "../pages/SignInPage";
@@ -17,7 +22,11 @@ export const routes = [
   },
   {
     path: "/sign-in",
-    element: <SignInPage />,
+    element: (
+      <AuthRoute>
+        <SignInPage />,
+      </AuthRoute>
+    ),
   },
   {
     path: "/search-car",
@@ -28,8 +37,36 @@ export const routes = [
     element: <DetailCarPage />,
   },
   {
-    path: "/payment",
-    element: <PaymentPage />,
+    path: "/payment/:id",
+    element: (
+      <ProtectedRoute>
+        <PaymentPage />
+      </ProtectedRoute>
+    ),
+  },
+  {
+    path: "/payment/:id/:bank",
+    element: (
+      <ProtectedRoute>
+        <PaymentUploadPage />
+      </ProtectedRoute>
+    ),
+  },
+  {
+    path: "/payment/:id/etiket",
+    element: (
+      <ProtectedRoute>
+        <EtiketPaymentPage />,
+      </ProtectedRoute>
+    ),
+  },
+  {
+    path: "/payment/:id/pdf",
+    element: (
+      <ProtectedRoute>
+        <PdfPreviewPage />,
+      </ProtectedRoute>
+    ),
   },
   {
     path: "*",

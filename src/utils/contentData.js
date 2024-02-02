@@ -125,3 +125,33 @@ export const responsive = {
     slidesToSlide: 1,
   },
 };
+
+export const banksTransfer = [
+  {
+    name: "BCA",
+    desc: "BCA Transfer",
+  },
+  {
+    name: "BNI",
+    desc: "BNI Transfer",
+  },
+  {
+    name: "Mandiri",
+    desc: "Mandiri Transfer",
+  },
+];
+
+export const bankPaymentOptions = [
+  {
+    name: "ATM",
+  },
+  {
+    name: "M -",
+  },
+  {
+    name: "Klik",
+  },
+  {
+    name: "Internet Banking",
+  },
+];
