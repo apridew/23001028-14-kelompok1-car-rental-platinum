@@ -55,8 +55,8 @@ const EtiketPayment = () => {
   };
 
   const handlePreviewPDF = () => {
-    const url = `/payment/${id}/pdf`;
-    window.open(url, "_blank");
+    navigate(`/payment/${id}/pdf`);
+    // window.open(url, "_blank");
   };
 
   return (
