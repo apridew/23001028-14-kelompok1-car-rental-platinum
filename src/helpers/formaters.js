@@ -10,11 +10,11 @@ export const idrFormater = (amount) => {
 export const categoryTextFormater = (category) => {
   let categoryText = "";
   if (category === "small") {
-    categoryText = "2 - 4 people";
+    categoryText = "2 - 4 People";
   } else if (category === "medium") {
-    categoryText = "4 - 6 people";
+    categoryText = "4 - 6 People";
   } else if (category === "large") {
-    categoryText = "6 - 8 people";
+    categoryText = "6 - 8 People";
   } else {
     categoryText = "Undefined";
   }

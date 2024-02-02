@@ -45,8 +45,8 @@ const PaymentDetail = () => {
   };
 
   const handleUpload = async () => {
-    const token =
-      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQGJjci5pbyIsInJvbGUiOiJBZG1pbiIsImlhdCI6MTY2NTI0MjUwOX0.ZTx8L1MqJ4Az8KzoeYU2S614EQPnqk6Owv03PUSnkzc";
+    const token = localStorage.getItem("token");
+
     const config = {
       headers: {
         access_token: token,
@@ -111,7 +111,9 @@ const PaymentDetail = () => {
               role="button"
             ></i>
             <div className="info-bank-order ps-3">
-              <h4 className="m-0">{`${bank.toUpperCase()} Transfer`}</h4>
+              <h4 className="m-0">{`${
+                bank === "mandiri" ? "Mandiri" : bank.toUpperCase()
+              } Transfer`}</h4>
               <p className="m-0">{`Order ID : ${id}`}</p>
             </div>
           </div>

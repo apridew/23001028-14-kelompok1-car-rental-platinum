@@ -4,7 +4,7 @@ import * as formater from "../../helpers/formaters";
 
 const Button = (props) => (
   <div className="button-primary">
-    <Link onClick={formater.scrollTop} to={props.link}>
+    <Link onClick={props.onClick || formater.scrollTop} to={props.link}>
       <button type="button" className="btn btn-success border-0 hidden-button">
         {props.name}
       </button>

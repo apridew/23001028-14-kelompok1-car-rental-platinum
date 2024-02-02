@@ -57,7 +57,7 @@ const Footer = () => {
             </div>
           </div>
           <div className="col-lg-3 col-md-3 col-sm-12 pb-5">
-            <p>Copyright Binar 2023</p>
+            <p>Copyright Binar {new Date().getFullYear()}</p>
             <HashLink
               onClick={formater.scrollTop}
               to={"/"}

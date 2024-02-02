@@ -59,14 +59,14 @@ const PdfPreviewPage = () => {
       <div className="mt-5 pt-3">
         <PDFViewer width="100%" height="600px">
           <MyDocumentPDF
-            invoice={`Invoice-${id}-${orderData.CarId}`}
+            invoice={`#${id}-${orderData.CarId}`}
             email={userData.email}
             carName={carDetail.name}
             capacity={formater.categoryTextFormater(carDetail.category)}
             rent={`${formater.dateFormater(
               orderData.start_rent_at
             )} - ${formater.dateFormater(orderData.finish_rent_at)}`}
-            total={`${daysRent} Hari x ${formater.idrFormater(
+            total={`${daysRent} days x ${formater.idrFormater(
               carDetail.price
             )} = ${formater.idrFormater(totalPrice)}`}
           />

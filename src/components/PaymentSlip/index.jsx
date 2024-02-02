@@ -6,18 +6,12 @@ import { useEffect, useState } from "react";
 import checklist from "../../assets/img/payment/checklist.png";
 
 const PaymentSlip = ({ bank, totalPrice }) => {
-  const [selectedBank, setSelectedBank] = useState("");
+  const [selectedBank, setSelectedBank] = useState("ATM");
   const [isCopy, setIsCopy] = useState(false);
   const param = useParams();
   const navigate = useNavigate();
 
   useEffect(() => {}, [selectedBank]);
-
-  const handleSubmit = async () => {
-    formater.scrollTop();
-    navigate(`/payment/${param.id}/${selectedBank.toLowerCase()}`);
-    console.log(param.id);
-  };
 
   const chooseBank = (e) => {
     setSelectedBank(e.currentTarget.dataset.value);
@@ -96,33 +90,61 @@ const PaymentSlip = ({ bank, totalPrice }) => {
           </div>
 
           {/* Left Third Content */}
-          <div className="col-lg-7 col-9 content-left">
+          <div className="col-lg-7 col-9 content-left pb-5">
             <p>Instruksi Pembayaran</p>
-            <p className="fw-normal">
-              Kamu bisa membayar dengan transfer melalui ATM, Internet Banking
-              atau Mobile Banking
-            </p>
-            {contentData.banksTransfer.map((data, id) => (
-              <div
-                key={id}
-                className="banks d-flex align-items-center gap-3 border-1 border-bottom py-4"
-              >
+
+            <div className="d-flex justify-content-evenly">
+              {contentData.bankPaymentOptions.map((data, id) => (
                 <div
-                  className="card px-3 py-1 text-center"
-                  onClick={chooseBank}
-                  data-value={data.name}
-                  role="button"
+                  key={id}
+                  className="banks w-100 d-flex flex-column align-items-center "
                 >
-                  {data.name}
-                </div>
-                <div className="border-2">{data.desc}</div>
-                {selectedBank === data.name && (
-                  <div className="w-50 text-end">
-                    <img src={checklist} alt="checklist" />
+                  <div
+                    onClick={chooseBank}
+                    data-value={data.name}
+                    role="button"
+                    key={id}
+                    className="py-2 text-center"
+                  >
+                    {data.name}{" "}
+                    {data.name === "Internet Banking"
+                      ? ""
+                      : param.bank.toLocaleUpperCase()}
                   </div>
-                )}
-              </div>
-            ))}
+                  {selectedBank === data.name && (
+                    <div className="border-2 border-success border-bottom w-100"></div>
+                  )}
+                </div>
+              ))}
+            </div>
+            <div className="border-1 border-bottom w-100"></div>
+            {/* Content Payment Options */}
+            <div className="content-payment-options mt-3 text-secondary">
+              <ul>
+                <li>Masukkan kartu ATM, lalu PIN</li>
+                <li>
+                  Pilih menu “Transaksi Lainnya” – ‘Transfer” – “Ke Rek{" "}
+                  {param.bank.toLocaleUpperCase()} Virtual Account”
+                </li>
+                <li>
+                  Masukkan nomor {param.bank.toLocaleUpperCase()} Virtual
+                  Account: 70020+Order ID
+                </li>
+              </ul>
+              <p className="ps-4 py-1 m-0 fw-light fs-6 text-secondary">
+                Contoh :
+              </p>
+              <p className="ps-4 m-0 fw-light fs-6 text-secondary">
+                No. Peserta: 12345678, maka ditulis 7002012345678
+              </p>
+              <ul>
+                <li>
+                  Layar ATM akan menampilkan konfirmasi, ikuti instruksi untuk
+                  menyelesaikan transaksi
+                </li>
+                <li>Ambil dan simpanlah bukti transaksi tersebut</li>
+              </ul>
+            </div>
           </div>
         </div>
       </div>

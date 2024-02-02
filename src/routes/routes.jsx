@@ -1,3 +1,5 @@
+import AuthRoute from "../hoc/AuthRoute";
+import ProtectedRoute from "../hoc/ProtectedRoute";
 import DetailCarPage from "../pages/DetailCarPage";
 import EtiketPaymentPage from "../pages/EtiketPaymentPage";
 import LandingPage from "../pages/LandingPage";
@@ -20,7 +22,11 @@ export const routes = [
   },
   {
     path: "/sign-in",
-    element: <SignInPage />,
+    element: (
+      <AuthRoute>
+        <SignInPage />,
+      </AuthRoute>
+    ),
   },
   {
     path: "/search-car",
@@ -32,19 +38,35 @@ export const routes = [
   },
   {
     path: "/payment/:id",
-    element: <PaymentPage />,
+    element: (
+      <ProtectedRoute>
+        <PaymentPage />
+      </ProtectedRoute>
+    ),
   },
   {
     path: "/payment/:id/:bank",
-    element: <PaymentUploadPage />,
+    element: (
+      <ProtectedRoute>
+        <PaymentUploadPage />
+      </ProtectedRoute>
+    ),
   },
   {
     path: "/payment/:id/etiket",
-    element: <EtiketPaymentPage />,
+    element: (
+      <ProtectedRoute>
+        <EtiketPaymentPage />,
+      </ProtectedRoute>
+    ),
   },
   {
     path: "/payment/:id/pdf",
-    element: <PdfPreviewPage />,
+    element: (
+      <ProtectedRoute>
+        <PdfPreviewPage />,
+      </ProtectedRoute>
+    ),
   },
   {
     path: "*",

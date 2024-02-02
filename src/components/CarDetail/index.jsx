@@ -113,8 +113,7 @@ const CarDetail = () => {
       };
       // console.log("Data:", data)
 
-      const token =
-        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQGJjci5pbyIsInJvbGUiOiJBZG1pbiIsImlhdCI6MTcwNjc1MzQ0NX0.jPvYk2i9vZNrPKq5gy6xxlfhAZNALVINO5sMYoaJOiI";
+      const token = localStorage.getItem("token");
 
       const config = {
         headers: {
@@ -130,10 +129,15 @@ const CarDetail = () => {
       console.log("Custom Order:", ress.data);
 
       setTimeout(() => {
+        formater.scrollTop();
         navigate(`/payment/${ress.data.id}`);
       }, 1000);
     } catch (error) {
       console.log(error.response.data);
+      localStorage.setItem("redirectPath", `/detail-car/${carDetail.id}`);
+      setTimeout(() => {
+        navigate("/sign-in");
+      }, 1000);
     }
   };
 
@@ -141,7 +145,7 @@ const CarDetail = () => {
     <>
       <div className="container mb-5" id="car-detail">
         <div className="row">
-          <div className="col content-left">
+          <div className="col content-left h-100">
             <p>Tentang Paket</p>
             <p>Include</p>
             <ul>

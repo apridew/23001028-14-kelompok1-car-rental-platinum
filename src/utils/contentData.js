@@ -140,3 +140,18 @@ export const banksTransfer = [
     desc: "Mandiri Transfer",
   },
 ];
+
+export const bankPaymentOptions = [
+  {
+    name: "ATM",
+  },
+  {
+    name: "M -",
+  },
+  {
+    name: "Klik",
+  },
+  {
+    name: "Internet Banking",
+  },
+];

@@ -1,3 +1,4 @@
+import "./style.css";
 import React, { useState, useEffect } from "react";
 
 const CountDown = ({ hours = 0, minutes = 0, seconds = 0, showHours }) => {
@@ -37,10 +38,19 @@ const CountDown = ({ hours = 0, minutes = 0, seconds = 0, showHours }) => {
 
   return (
     <>
-      <h2>
-        {showHours && `${formatTime(timeLeft.hours)}:`}
-        {formatTime(timeLeft.minutes)}:{formatTime(timeLeft.seconds)}
-      </h2>
+      <div className="countdown d-flex fs-5 gap-2">
+        <h6 className={showHours && "alert bg-danger text-white fs-5 p-2"}>
+          {showHours && `${formatTime(timeLeft.hours)}`}
+        </h6>
+        {showHours && ":"}
+        <h6 className="alert bg-danger text-white fs-5 p-2">
+          {formatTime(timeLeft.minutes)}
+        </h6>
+        :
+        <h6 className="alert bg-danger text-white fs-5 p-2">
+          {formatTime(timeLeft.seconds)}
+        </h6>
+      </div>
     </>
   );
 };
