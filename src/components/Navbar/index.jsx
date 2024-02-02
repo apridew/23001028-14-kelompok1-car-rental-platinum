@@ -1,14 +1,28 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "./style.css";
 import { HashLink } from "react-router-hash-link";
 import * as formater from "../../helpers/formaters";
+import { useDispatch, useSelector } from "react-redux";
+import { setLoggedIn, setLoggedOut } from "../../redux/features/auth/authSlice";
 
 const Navbar = () => {
   const token = localStorage.getItem("token");
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const isLogin = useSelector((state) => state.auth.isLoggedIn);
 
   const handleButton = () => {
     if (token) {
       localStorage.removeItem("token");
+      setTimeout(() => {
+        navigate("/sign-in");
+      }, 1000);
+      dispatch(setLoggedIn());
+      setTimeout(() => {
+        dispatch(setLoggedOut());
+      }, 2000);
+    } else {
+      navigate("/register");
     }
   };
 
@@ -93,21 +107,22 @@ const Navbar = () => {
                 </li>
                 <li>
                   <div className="button-sign-out">
-                    <Link
+                    <button
                       onClick={handleButton || formater.scrollTop}
-                      to={`${!token ? "/register" : "/sign-in"}`}
+                      type="button"
+                      className={`${
+                        token
+                          ? "btn btn-success border-0 hidden-button bg-danger"
+                          : "btn btn-success border-0 hidden-button"
+                      }`}
                     >
-                      <button
-                        type="button"
-                        className={`${
-                          token
-                            ? "btn btn-success border-0 hidden-button bg-danger"
-                            : "btn btn-success border-0 hidden-button"
-                        }`}
-                      >
-                        {`${token ? "Sign Out" : "Register"}`}
-                      </button>
-                    </Link>
+                      {token ? "Sign Out" : "Register"}
+                    </button>
+                    {isLogin && (
+                      <div className="card fw-bold bg-danger-subtle text-danger border-0 position-absolute p-3 top-100 start-50">
+                        Sign Out Berhasil
+                      </div>
+                    )}
                   </div>
                 </li>
               </ul>

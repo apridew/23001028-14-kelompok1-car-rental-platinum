@@ -10,6 +10,8 @@ import addDays from "date-fns/addDays";
 import * as icon from "react-feather";
 import "react-date-range/dist/styles.css";
 import "react-date-range/dist/theme/default.css";
+import { useDispatch, useSelector } from "react-redux";
+import { setLoading, clearLoading } from "../../redux/features/auth/authSlice";
 
 const CarDetail = () => {
   const [carDetail, setCarDetail] = useState({});
@@ -29,6 +31,8 @@ const CarDetail = () => {
   const param = useParams();
   const refOne = useRef(null);
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const isLoading = useSelector((state) => state.auth.loading);
 
   useEffect(() => {
     handleGetCarDetail();
@@ -120,6 +124,12 @@ const CarDetail = () => {
           access_token: token,
         },
       };
+
+      dispatch(setLoading());
+
+      setTimeout(() => {
+        dispatch(clearLoading());
+      }, 1000);
 
       const ress = await axios.post(
         `https://api-car-rental.binaracademy.org/customer/order`,
@@ -272,9 +282,15 @@ const CarDetail = () => {
                 <button
                   className={`button ${!inputValue ? "" : "disabled"}`}
                   onClick={handleSubmit}
-                  disabled={!inputValue}
+                  disabled={!inputValue || isLoading}
                 >
-                  Lanjutkan Pembayaran
+                  {isLoading ? (
+                    <div className="spinner-border" role="status">
+                      <span className="visually-hidden"></span>
+                    </div>
+                  ) : (
+                    "Lanjut Kan Pembayaran"
+                  )}
                 </button>
               </div>
             </div>

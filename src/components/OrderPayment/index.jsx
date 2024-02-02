@@ -4,17 +4,26 @@ import * as contentData from "../../utils/contentData";
 import * as formater from "../../helpers/formaters";
 import { useEffect, useState } from "react";
 import checklist from "../../assets/img/payment/checklist.png";
+import { useDispatch, useSelector } from "react-redux";
+import { setLoading, clearLoading } from "../../redux/features/auth/authSlice";
 
 const OrderPayment = ({ price, nameCar, category, daysRent, totalPrice }) => {
   const [selectedBank, setSelectedBank] = useState("");
   const param = useParams();
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const isLoading = useSelector((state) => state.auth.loading);
 
   useEffect(() => {}, [selectedBank]);
 
   const handleSubmit = async () => {
     formater.scrollTop();
-    navigate(`/payment/${param.id}/${selectedBank.toLowerCase()}`);
+    dispatch(setLoading());
+
+    setTimeout(() => {
+      dispatch(clearLoading());
+      navigate(`/payment/${param.id}/${selectedBank.toLowerCase()}`);
+    }, 1000);
     console.log(param.id);
   };
 
@@ -148,9 +157,15 @@ const OrderPayment = ({ price, nameCar, category, daysRent, totalPrice }) => {
                 <button
                   className={`button ${!selectedBank ? "" : "disabled"}`}
                   onClick={handleSubmit}
-                  disabled={!selectedBank}
+                  disabled={!selectedBank || isLoading}
                 >
-                  Bayar
+                  {isLoading ? (
+                    <div className="spinner-border" role="status">
+                      <span className="visually-hidden"></span>
+                    </div>
+                  ) : (
+                    "Bayar"
+                  )}
                 </button>
               </div>
             </div>
