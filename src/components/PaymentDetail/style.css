@@ -67,11 +67,12 @@
 }
 
 .wrpper-all-payment {
-  max-width: 80%;
+  max-width: 1200px;
   margin: auto;
   display: flex;
   justify-content: space-between;
   gap: 24px;
+  padding-right: 90px !important;
 }
 
 .header-top-order {

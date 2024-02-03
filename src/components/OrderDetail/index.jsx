@@ -1,9 +1,9 @@
 import "./style.css";
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import axios from "axios";
 import * as formater from "../../helpers/formaters";
 import OrderPayment from "../OrderPayment";
+import { getOrderDetail } from "../../helpers/apis";
 
 const OrderDetail = () => {
   const [carDetail, setCarDetail] = useState({});
@@ -17,26 +17,13 @@ const OrderDetail = () => {
   }, []);
 
   const handleGetOrderDetail = async () => {
-    const token =
-      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQGJjci5pbyIsInJvbGUiOiJBZG1pbiIsImlhdCI6MTY2NTI0MjUwOX0.ZTx8L1MqJ4Az8KzoeYU2S614EQPnqk6Owv03PUSnkzc";
-    const config = {
-      headers: {
-        access_token: token,
-      },
-    };
-    await axios
-      .get(
-        `https://api-car-rental.binaracademy.org/customer/order/${param.id}`,
-        config
-      )
-      .then((res) => {
-        setOrderData(res.data);
-        setCarDetail(res.data.Car);
-        console.log("API Order Data", res);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    try {
+      const res = await getOrderDetail(param.id);
+      setOrderData(res.data);
+      setCarDetail(res.data.Car);
+    } catch (error) {
+      console.log(error.response.data);
+    }
   };
 
   const dataCarDetail = formater.orderCarFormatter(

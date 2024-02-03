@@ -109,7 +109,7 @@ const FormRegister = () => {
                       <span className="visually-hidden"></span>
                     </div>
                   ) : (
-                    "Sign In"
+                    "Sign Up"
                   )}
                 </button>
               </div>

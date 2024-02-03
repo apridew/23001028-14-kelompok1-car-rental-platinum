@@ -1,15 +1,13 @@
 import "./style.css";
-import { useNavigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import * as contentData from "../../utils/contentData";
 import * as formater from "../../helpers/formaters";
 import { useEffect, useState } from "react";
-import checklist from "../../assets/img/payment/checklist.png";
 
 const PaymentSlip = ({ bank, totalPrice }) => {
   const [selectedBank, setSelectedBank] = useState("ATM");
   const [isCopy, setIsCopy] = useState(false);
   const param = useParams();
-  const navigate = useNavigate();
 
   useEffect(() => {}, [selectedBank]);
 
@@ -119,32 +117,57 @@ const PaymentSlip = ({ bank, totalPrice }) => {
             </div>
             <div className="border-1 border-bottom w-100"></div>
             {/* Content Payment Options */}
-            <div className="content-payment-options mt-3 text-secondary">
-              <ul>
-                <li>Masukkan kartu ATM, lalu PIN</li>
-                <li>
-                  Pilih menu “Transaksi Lainnya” – ‘Transfer” – “Ke Rek{" "}
-                  {param.bank.toLocaleUpperCase()} Virtual Account”
-                </li>
-                <li>
-                  Masukkan nomor {param.bank.toLocaleUpperCase()} Virtual
-                  Account: 70020+Order ID
-                </li>
-              </ul>
-              <p className="ps-4 py-1 m-0 fw-light fs-6 text-secondary">
-                Contoh :
-              </p>
-              <p className="ps-4 m-0 fw-light fs-6 text-secondary">
-                No. Peserta: 12345678, maka ditulis 7002012345678
-              </p>
-              <ul>
-                <li>
-                  Layar ATM akan menampilkan konfirmasi, ikuti instruksi untuk
-                  menyelesaikan transaksi
-                </li>
-                <li>Ambil dan simpanlah bukti transaksi tersebut</li>
-              </ul>
-            </div>
+            {selectedBank === "ATM" && (
+              <>
+                <div className="content-payment-options mt-3 text-secondary">
+                  <ul>
+                    <li>Masukkan kartu ATM, lalu PIN</li>
+                    <li>
+                      Pilih menu “Transaksi Lainnya” – ‘Transfer” – “Ke Rek{" "}
+                      {param.bank.toLocaleUpperCase()} Virtual Account”
+                    </li>
+                    <li>
+                      Masukkan nomor {param.bank.toLocaleUpperCase()} Virtual
+                      Account: 70020+Order ID
+                    </li>
+                  </ul>
+                  <p className="ps-4 py-1 m-0 fw-light fs-6 text-secondary">
+                    Contoh :
+                  </p>
+                  <p className="ps-4 m-0 fw-light fs-6 text-secondary">
+                    No. Peserta: 12345678, maka ditulis 7002012345678
+                  </p>
+                  <ul>
+                    <li>
+                      Layar ATM akan menampilkan konfirmasi, ikuti instruksi
+                      untuk menyelesaikan transaksi
+                    </li>
+                    <li>Ambil dan simpanlah bukti transaksi tersebut</li>
+                  </ul>
+                </div>
+              </>
+            )}
+            {selectedBank === "Internet Banking" && (
+              <div className="content-payment-options mt-3 text-secondary">
+                <ul>
+                  <li>Payment use internet banking {bank.toUpperCase()}</li>
+                </ul>
+              </div>
+            )}
+            {selectedBank === "M -" && (
+              <div className="content-payment-options mt-3 text-secondary">
+                <ul>
+                  <li>Payment use mobile banking {bank.toUpperCase()}</li>
+                </ul>
+              </div>
+            )}
+            {selectedBank === "Klik" && (
+              <div className="content-payment-options mt-3 text-secondary">
+                <ul>
+                  <li>Payment use klik banking {bank.toUpperCase()}</li>
+                </ul>
+              </div>
+            )}
           </div>
         </div>
       </div>
