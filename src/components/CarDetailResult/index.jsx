@@ -1,8 +1,8 @@
 import "./style.css";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import axios from "axios";
 import * as formater from "../../helpers/formaters";
+import { getCarDetail } from "../../helpers/apis";
 
 const CarDetailResult = () => {
   const [carDetail, setCarDetail] = useState({});
@@ -12,16 +12,13 @@ const CarDetailResult = () => {
   useEffect(() => {
     handleGetCarDetail();
   }, []);
-  const handleGetCarDetail = () => {
-    axios
-      .get(`https://api-car-rental.binaracademy.org/customer/car/${param.id}`)
-      .then((res) => {
-        setCarDetail(res.data);
-        console.log("API Car Detail", res);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+  const handleGetCarDetail = async () => {
+    try {
+      const ress = await getCarDetail(param.id);
+      setCarDetail(ress.data);
+    } catch (error) {
+      console.log(error.response.data);
+    }
   };
 
   const dataCarDetail = formater.dataCarFormater(

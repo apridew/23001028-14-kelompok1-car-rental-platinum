@@ -1,21 +1,20 @@
 import "./style.css";
 import { useNavigate, useParams } from "react-router-dom";
-import axios from "axios";
 import { useEffect, useState, useRef } from "react";
 import * as contentData from "../../utils/contentData";
 import * as formater from "../../helpers/formaters";
-import format from "date-fns/format";
-import { DateRange } from "react-date-range";
-import addDays from "date-fns/addDays";
 import * as icon from "react-feather";
+import addDays from "date-fns/addDays";
+import format from "date-fns/format";
 import "react-date-range/dist/styles.css";
 import "react-date-range/dist/theme/default.css";
+import { DateRange } from "react-date-range";
 import { useDispatch, useSelector } from "react-redux";
 import { setLoading, clearLoading } from "../../redux/features/auth/authSlice";
+import { getCarDetail, orderCar } from "../../helpers/apis";
 
 const CarDetail = () => {
   const [carDetail, setCarDetail] = useState({});
-  // console.log("Car Detail:", carDetail);
   const [range, setRange] = useState([
     {
       startDate: addDays(new Date(), 1),
@@ -23,11 +22,11 @@ const CarDetail = () => {
       key: "selection",
     },
   ]);
+
   const [open, setOpen] = useState(false);
   const [price, setPrice] = useState(0);
   const [inputValue, setInputValue] = useState("");
   const [error, setError] = useState("");
-  // console.log("Input Value:", inputValue);
   const param = useParams();
   const refOne = useRef(null);
   const navigate = useNavigate();
@@ -36,24 +35,18 @@ const CarDetail = () => {
 
   useEffect(() => {
     handleGetCarDetail();
-  }, []);
-
-  const handleGetCarDetail = () => {
-    axios
-      .get(`https://api-car-rental.binaracademy.org/customer/car/${param.id}`)
-      .then((res) => {
-        setCarDetail(res.data);
-        console.log("API Car Detail", res);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
-
-  useEffect(() => {
     document.addEventListener("keydown", hideOnEscape, true);
     document.addEventListener("click", hideOnClickOutside, true);
   }, []);
+
+  const handleGetCarDetail = async () => {
+    try {
+      const ress = await getCarDetail(param.id);
+      setCarDetail(ress.data);
+    } catch (error) {
+      console.log(error.response.data);
+    }
+  };
 
   const hideOnEscape = (e) => {
     console.log(e.key);
@@ -109,34 +102,20 @@ const CarDetail = () => {
   const handleSubmit = async () => {
     console.log("Input Value:", inputValue);
 
+    const data = {
+      start_rent_at: range[0].startDate,
+      finish_rent_at: range[0].endDate,
+      car_id: carDetail.id,
+    };
+    // console.log("Data:", data)
     try {
-      const data = {
-        start_rent_at: range[0].startDate,
-        finish_rent_at: range[0].endDate,
-        car_id: carDetail.id,
-      };
-      // console.log("Data:", data)
-
-      const token = localStorage.getItem("token");
-
-      const config = {
-        headers: {
-          access_token: token,
-        },
-      };
+      const ress = await orderCar(data);
 
       dispatch(setLoading());
 
       setTimeout(() => {
         dispatch(clearLoading());
       }, 1000);
-
-      const ress = await axios.post(
-        `https://api-car-rental.binaracademy.org/customer/order`,
-        data,
-        config
-      );
-      console.log("Custom Order:", ress.data);
 
       setTimeout(() => {
         formater.scrollTop();
@@ -289,7 +268,7 @@ const CarDetail = () => {
                       <span className="visually-hidden"></span>
                     </div>
                   ) : (
-                    "Lanjut Kan Pembayaran"
+                    "Lanjutkan Pembayaran"
                   )}
                 </button>
               </div>

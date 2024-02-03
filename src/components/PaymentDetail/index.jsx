@@ -1,12 +1,12 @@
 import "./style.css";
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import axios from "axios";
 import * as formater from "../../helpers/formaters";
 import CountDown from "../CountDown";
 import PaymentSlip from "../PaymentSlip";
 import { useDispatch, useSelector } from "react-redux";
 import { setLoading, clearLoading } from "../../redux/features/auth/authSlice";
+import { getOrderDetail, uploadSlip } from "../../helpers/apis";
 
 const PaymentDetail = () => {
   const [carDetail, setCarDetail] = useState({});
@@ -16,6 +16,7 @@ const PaymentDetail = () => {
   const [image, setImage] = useState(null);
   const [preview, setPreview] = useState(null);
   const dispatch = useDispatch();
+
   const isLoading = useSelector((state) => state.auth.loading);
 
   let { id, bank } = useParams();
@@ -26,64 +27,37 @@ const PaymentDetail = () => {
   }, []);
 
   const handleGetOrderDetail = async () => {
-    const token =
-      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQGJjci5pbyIsInJvbGUiOiJBZG1pbiIsImlhdCI6MTY2NTI0MjUwOX0.ZTx8L1MqJ4Az8KzoeYU2S614EQPnqk6Owv03PUSnkzc";
-    const config = {
-      headers: {
-        access_token: token,
-      },
-    };
-    await axios
-      .get(
-        `https://api-car-rental.binaracademy.org/customer/order/${id}`,
-        config
-      )
-      .then((res) => {
-        setOrderData(res.data);
-        setCarDetail(res.data.Car);
-        console.log("API Order Data", res);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    try {
+      const res = await getOrderDetail(id);
+      setOrderData(res.data);
+      setCarDetail(res.data.Car);
+    } catch (error) {
+      console.log(error.response.data);
+    }
   };
 
   const handleUpload = async () => {
-    const token = localStorage.getItem("token");
-
-    const config = {
-      headers: {
-        access_token: token,
-      },
-    };
-
     const formData = new FormData();
     formData.append("slip", image);
 
     if (!image) {
       setNoImage(false);
     }
-    await axios
-      .put(
-        `https://api-car-rental.binaracademy.org/customer/order/${id}/slip`,
-        formData,
-        config
-      )
-      .then((res) => {
-        formater.scrollTop;
-        console.log("API Upload Slip", res);
-        setTimeout(() => {
-          navigate(`/payment/${id}/etiket`);
-        }, 1000);
-        dispatch(setLoading());
+    try {
+      formater.scrollTop;
+      const res = await uploadSlip(id, formData);
 
-        setTimeout(() => {
-          dispatch(clearLoading());
-        }, 1000);
-      })
-      .catch((err) => {
-        console.log(err.response.data);
-      });
+      setTimeout(() => {
+        navigate(`/payment/${id}/etiket`);
+      }, 1000);
+      dispatch(setLoading());
+
+      setTimeout(() => {
+        dispatch(clearLoading());
+      }, 1000);
+    } catch (error) {
+      console.log(error.response.data);
+    }
   };
 
   const daysRent = formater.daysRentFormatter(
@@ -144,7 +118,7 @@ const PaymentDetail = () => {
 
       <div className="wrpper-all-payment" id="payment-detail">
         {/* Left First Content */}
-        <div className="d-flex flex-column gap-4">
+        <div className="payment-upload d-flex flex-column gap-4">
           <div className="container wrapper-payment-detail mb-0">
             <div className="left-payment">
               <h5 className="fs-6">Selesaikan Pembayaran Sebelum</h5>
@@ -164,7 +138,7 @@ const PaymentDetail = () => {
 
         {/* Right Content */}
         {isConfirm ? (
-          <div className="col-4 h-100 p-0 content-right d-flex justify-content-center justify-content-lg-end">
+          <div className="payment-confirmation col-4 h-100 p-0 content-right d-flex justify-content-center justify-content-lg-end">
             <div className="frame-card">
               <div className="d-flex justify-content-between align-items-center">
                 <h5 className="fs-6">Konfirmasi Pembayaran</h5>

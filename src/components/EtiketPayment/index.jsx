@@ -1,11 +1,11 @@
 import "./style.css";
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import axios from "axios";
 import * as formater from "../../helpers/formaters";
 import successIcon from "../../assets/img/payment/success.png";
 import MyDocumentPDF from "../MyDocumentPDF";
 import { PDFDownloadLink } from "@react-pdf/renderer";
+import { getOrderDetail } from "../../helpers/apis";
 
 const EtiketPayment = () => {
   const [carDetail, setCarDetail] = useState({});
@@ -20,26 +20,14 @@ const EtiketPayment = () => {
   }, []);
 
   const handleGetOrderDetail = async () => {
-    const token = localStorage.getItem("token");
-    const config = {
-      headers: {
-        access_token: token,
-      },
-    };
-    await axios
-      .get(
-        `https://api-car-rental.binaracademy.org/customer/order/${id}`,
-        config
-      )
-      .then((res) => {
-        setOrderData(res.data);
-        setCarDetail(res.data.Car);
-        setUserData(res.data.User);
-        console.log("API Order Data", res);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    try {
+      const res = await getOrderDetail(id);
+      setOrderData(res.data);
+      setCarDetail(res.data.Car);
+      setUserData(res.data.User);
+    } catch (error) {
+      console.log(error.response.data);
+    }
   };
 
   const daysRent = formater.daysRentFormatter(
