@@ -102,21 +102,20 @@ const CarDetail = () => {
   const handleSubmit = async () => {
     console.log("Input Value:", inputValue);
 
+    const data = {
+      start_rent_at: range[0].startDate,
+      finish_rent_at: range[0].endDate,
+      car_id: carDetail.id,
+    };
+    // console.log("Data:", data)
     try {
-      const data = {
-        start_rent_at: range[0].startDate,
-        finish_rent_at: range[0].endDate,
-        car_id: carDetail.id,
-      };
-      // console.log("Data:", data)
+      const ress = await orderCar(data);
 
       dispatch(setLoading());
 
       setTimeout(() => {
         dispatch(clearLoading());
       }, 1000);
-
-      const ress = await orderCar(data);
 
       setTimeout(() => {
         formater.scrollTop();
@@ -269,7 +268,7 @@ const CarDetail = () => {
                       <span className="visually-hidden"></span>
                     </div>
                   ) : (
-                    "Lanjut Kan Pembayaran"
+                    "Lanjutkan Pembayaran"
                   )}
                 </button>
               </div>

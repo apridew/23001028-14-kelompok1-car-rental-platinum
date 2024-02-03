@@ -137,3 +137,29 @@
 .pop-up-payment {
   font-size: small;
 }
+
+@media screen and (max-width: 1153px) {
+  .wrpper-all-payment {
+    flex-direction: column;
+    padding-right: 0px !important;
+  }
+
+  .payment-confirmation {
+    width: 100%;
+    margin-top: 0px;
+    margin-bottom: 24px;
+  }
+
+  .payment-upload {
+    gap: 0px;
+  }
+
+  #payment-detail .frame-card {
+    width: 100%;
+    margin-top: 0px;
+  }
+
+  .wrapper-payment-detail {
+    flex-direction: column;
+  }
+}

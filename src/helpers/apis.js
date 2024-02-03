@@ -1,13 +1,5 @@
 import axios from "axios";
 
-const token = localStorage.getItem("token");
-
-const config = {
-  headers: {
-    access_token: token,
-  },
-};
-
 // API Register
 export const registerCustomer = async (data) => {
   const res = await axios.post(
@@ -39,6 +31,14 @@ export const getCarDetail = async (id) => {
 
 // API Order
 export const orderCar = async (data) => {
+  const token = localStorage.getItem("token");
+
+  const config = {
+    headers: {
+      access_token: token,
+    },
+  };
+
   const res = await axios.post(
     `https://api-car-rental.binaracademy.org/customer/order`,
     data,
@@ -51,6 +51,13 @@ export const orderCar = async (data) => {
 
 // API Order Detail
 export const getOrderDetail = async (id) => {
+  const token = localStorage.getItem("token");
+
+  const config = {
+    headers: {
+      access_token: token,
+    },
+  };
   const res = await axios.get(
     `https://api-car-rental.binaracademy.org/customer/order/${id}`,
     config
@@ -61,6 +68,13 @@ export const getOrderDetail = async (id) => {
 
 // API Upload Slip
 export const uploadSlip = async (id, data) => {
+  const token = localStorage.getItem("token");
+
+  const config = {
+    headers: {
+      access_token: token,
+    },
+  };
   const res = await axios.put(
     `https://api-car-rental.binaracademy.org/customer/order/${id}/slip`,
     data,

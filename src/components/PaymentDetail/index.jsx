@@ -118,7 +118,7 @@ const PaymentDetail = () => {
 
       <div className="wrpper-all-payment" id="payment-detail">
         {/* Left First Content */}
-        <div className="d-flex flex-column gap-4">
+        <div className="payment-upload d-flex flex-column gap-4">
           <div className="container wrapper-payment-detail mb-0">
             <div className="left-payment">
               <h5 className="fs-6">Selesaikan Pembayaran Sebelum</h5>
@@ -138,7 +138,7 @@ const PaymentDetail = () => {
 
         {/* Right Content */}
         {isConfirm ? (
-          <div className="col-4 h-100 p-0 content-right d-flex justify-content-center justify-content-lg-end">
+          <div className="payment-confirmation col-4 h-100 p-0 content-right d-flex justify-content-center justify-content-lg-end">
             <div className="frame-card">
               <div className="d-flex justify-content-between align-items-center">
                 <h5 className="fs-6">Konfirmasi Pembayaran</h5>
