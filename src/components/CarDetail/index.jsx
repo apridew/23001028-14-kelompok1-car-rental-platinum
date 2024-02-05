@@ -7,26 +7,32 @@ import * as formater from "../../helpers/formaters";
 import format from "date-fns/format";
 import { DateRange } from "react-date-range";
 import addDays from "date-fns/addDays";
-import * as icon from "react-feather"
-import 'react-date-range/dist/styles.css';
-import 'react-date-range/dist/theme/default.css'
+import * as icon from "react-feather";
+import "react-date-range/dist/styles.css";
+import "react-date-range/dist/theme/default.css";
+import { useDispatch, useSelector } from "react-redux";
+import { setLoading, clearLoading } from "../../redux/features/cars/auth/auth";
 
 const CarDetail = () => {
   const [carDetail, setCarDetail] = useState({});
+  // console.log("Car Detail:", carDetail);
   const [range, setRange] = useState([
     {
-      startDate: new Date(),
+      startDate: addDays(new Date(), 1),
       endDate: addDays(new Date(), 7),
-      key: 'selection'
-    }
+      key: "selection",
+    },
   ]);
   const [open, setOpen] = useState(false);
   const [price, setPrice] = useState(0);
-  const [inputValue, setInputValue] = useState('');
-
+  const [inputValue, setInputValue] = useState("");
+  const [error, setError] = useState("");
+  // console.log("Input Value:", inputValue);
   const param = useParams();
   const refOne = useRef(null);
-  const navigate = useNavigate()
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const isLoading = useSelector((state) => state.auth.loading);
 
   useEffect(() => {
     handleGetCarDetail();
@@ -45,10 +51,9 @@ const CarDetail = () => {
   };
 
   useEffect(() => {
-    // setCalendar(format(new Date(), "MM/dd/yyyy"));
     document.addEventListener("keydown", hideOnEscape, true);
     document.addEventListener("click", hideOnClickOutside, true);
-  }, [])
+  }, []);
 
   const hideOnEscape = (e) => {
     console.log(e.key);
@@ -61,13 +66,13 @@ const CarDetail = () => {
     if (refOne.current && !refOne.current.contains(e.target)) {
       setOpen(false);
     }
-  }
+  };
   const formatDateToMonthName = (date) => {
     return format(date, "dd MMMM yyyy");
   };
 
   const handleButton = () => {
-    console.log('Selected Range:', range[0]);
+    console.log("Selected Range:", range[0]);
     setOpen(false);
 
     if (range[0].startDate && range[0].endDate) {
@@ -75,45 +80,82 @@ const CarDetail = () => {
         {
           startDate: range[0].startDate,
           endDate: range[0].endDate,
-          key: 'selection'
-        }
+          key: "selection",
+        },
       ]);
 
-      const totalDays = Math.ceil((range[0].endDate - range[0].startDate) / (1000 * 60 * 60 * 24));
-      console.log(totalDays);
+      const totalDays = Math.ceil(
+        (range[0].endDate - range[0].startDate) / (1000 * 60 * 60 * 24)
+      );
+      console.log("Total Days:", totalDays);
 
-      const totalPrice = totalDays * carDetail.price;
+      if (totalDays > 7) {
+        console.log("Car cannot be longer than 7 days");
+        setError("Car cannot be longer than 7 days");
+        setInputValue("");
+      } else {
+        const totalPrice = totalDays * carDetail.price;
+        setPrice(totalPrice);
+
+        const formattedStartDate = formatDateToMonthName(range[0].startDate);
+        const formattedEndDate = formatDateToMonthName(range[0].endDate);
+
+        setInputValue(`${formattedStartDate} - ${formattedEndDate}`);
+      }
       // console.log(totalPrice);
-      setPrice(totalPrice);
-
-      const formattedStartDate = formatDateToMonthName(range[0].startDate);
-      const formattedEndDate = formatDateToMonthName(range[0].endDate);
-
-      setInputValue(`${formattedStartDate} - ${formattedEndDate}`);
     }
-  }
+  };
 
-  const handleSubmit = () => {
-    const token = localStorage.getItem("accesToken");
-    if (token !== null && token !== undefined) {
-      console.log('Input Value:', inputValue);
-      navigate('/payment')
-      alert("success");
+  const handleSubmit = async () => {
+    console.log("Input Value:", inputValue);
 
-    } else {
-      alert("Anda belum Login : Anda Akan diarahkan ke Halaman Login");
-        localStorage.setItem("redirectPath", window.location.pathname);
+    try {
+      const data = {
+        start_rent_at: range[0].startDate,
+        finish_rent_at: range[0].endDate,
+        car_id: carDetail.id,
+      };
+      // console.log("Data:", data)
+
+      const token = localStorage.getItem("accesToken");
+
+      const config = {
+        headers: {
+          access_token: token,
+        },
+      };
+
+      dispatch(setLoading());
+
+      setTimeout(() => {
+        dispatch(clearLoading());
+      }, 1000);
+
+      const ress = await axios.post(
+        `https://api-car-rental.binaracademy.org/customer/order`,
+        data,
+        config
+      );
+      console.log("Custom Order:", ress.data);
+
+      setTimeout(() => {
+        formater.scrollTop();
+        navigate(`/payment/${ress.data.id}`);
+      }, 1000);
+    } catch (error) {
+      console.log(error.response.data);
+      localStorage.setItem("redirectPath", window.location.pathname);
+      setTimeout(() => {
         navigate("/sign-in");
+      }, 1000);
     }
-
-  }
-
+  };
 
   return (
     <>
       <div className="container mb-5" id="car-detail">
         <div className="row">
-          <div className="col content-left">
+          <div className="col content-left h-100">
             <p>Tentang Paket</p>
             <p>Include</p>
             <ul>
@@ -186,34 +228,44 @@ const CarDetail = () => {
                 </h6>
 
                 <div className="calendarInput">
-                  <label htmlFor="info">Tentukan lama sewa mobil (max. 7 hari)</label>
-                  <icon.Calendar onClick={() => setOpen(open => !open)} />
+                  {!inputValue && (
+                    <span
+                      className="input-error"
+                      style={{ display: error ? "block" : "none" }}
+                    >
+                      {error}
+                    </span>
+                  )}
+                  <label htmlFor="info">
+                    Tentukan lama sewa mobil (max. 7 hari)
+                  </label>
+                  <icon.Calendar onClick={() => setOpen((open) => !open)} />
                   <input
                     id="info"
                     readOnly
                     className="inputBox"
                     placeholder="Pilih tanggal mulai dan tanggal akhir sewa"
                     value={inputValue}
-                    onClick={() => setOpen(open => !open)}
+                    onClick={() => setOpen((open) => !open)}
                     style={{ fontSize: "14px" }}
                   />
                 </div>
 
-                <div className="calendarWrap" ref={refOne} >
+                <div className="calendarWrap" ref={refOne}>
                   {open && (
                     <>
                       <DateRange
-                        onChange={item => setRange([item.selection])}
+                        onChange={(item) => setRange([item.selection])}
                         editableDateInputs={true}
                         moveRangeOnFirstSelection={false}
                         ranges={range}
                         months={1}
+                        // shownDate={addDays(new Date(), 1)}
                         minDate={new Date()}
                         direction="horizontal"
                         className="calendarElements"
                         rangeColors={["#35B0A7"]}
                         showMonthAndYearPickers={true}
-
                       />
                       <div className="calendarButton">
                         <button onClick={handleButton}>Pilih Tanggal</button>
@@ -228,10 +280,18 @@ const CarDetail = () => {
                 </div>
 
                 <button
-                  className={`button ${!inputValue ? '' : 'disabled'}`}
+                  className={`button ${!inputValue ? "" : "disabled"}`}
                   onClick={handleSubmit}
-                  disabled={!inputValue}
-                >Lanjutkan Pembayaran</button>
+                  disabled={!inputValue || isLoading}
+                >
+                  {isLoading ? (
+                    <div className="spinner-border" role="status">
+                      <span className="visually-hidden"></span>
+                    </div>
+                  ) : (
+                    "Lanjut Kan Pembayaran"
+                  )}
+                </button>
               </div>
             </div>
           </div>

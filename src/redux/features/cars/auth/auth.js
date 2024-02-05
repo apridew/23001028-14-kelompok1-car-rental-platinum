@@ -7,6 +7,8 @@ const initialState = {
   isError : false,
   isSuccess : false,
   message : "",
+  loading: false,
+  isLoggedIn: false,
   
 };
 
@@ -35,7 +37,20 @@ export const LoginUser = createAsyncThunk("auth/login", async (user, thunkAPI) =
 export const authSlice = createSlice({
     name: "auth",
     initialState,
-    reducers:{},
+    reducers:{
+      setLoading: (state) => {
+        state.loading = true;
+      },
+      clearLoading: (state) => {
+        state.loading = false;
+      },
+      setLoggedIn: (state) => {
+        state.isLoggedIn = true;
+      },
+      setLoggedOut: (state) => {
+        state.isLoggedIn = false;
+      },
+    },
         extraReducers:(builder) =>{
           builder
           .addCase(LoginUser.pending, (state) => {
@@ -56,6 +71,9 @@ export const authSlice = createSlice({
         }
     
 })
+
+export const { setLoading, clearLoading, setLoggedIn, setLoggedOut } =
+  authSlice.actions;
 
 
 export default authSlice.reducer;

@@ -1,128 +1,127 @@
 #car-detail {
     font-family: Arial, Helvetica, sans-serif;
-}
-
-#car-detail .row {
+    max-width: 80%;
+  }
+  
+  #car-detail .row {
     display: flex;
     gap: 24px;
     justify-content: center;
     flex-wrap: wrap;
-}
-
-#car-detail .content-left {
+  }
+  
+  #car-detail .content-left {
     padding: 24px;
     border-radius: 8px;
     box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.15);
     min-width: 336px;
-}
-
-#car-detail span {
+  }
+  
+  #car-detail span:first-child {
     font-size: 12px;
     padding-right: 2px;
-}
-
-#car-detail h6 {
-    color: #8A8A8A;
+  }
+  
+  #car-detail h6 {
+    color: #8a8a8a;
     font-size: 10px;
     font-weight: 700;
-    line-height: 14px
-}
-
-#car-detail p {
+    line-height: 14px;
+  }
+  
+  #car-detail p {
     color: #000;
     font-size: 14px;
     font-weight: 700;
     line-height: 20px;
     margin: 0;
     padding-bottom: 16px;
-}
-
-#car-detail .content-card-top p:first-of-type {
+  }
+  
+  #car-detail .content-card-top p:first-of-type {
     color: #000;
     font-size: 14px;
     font-weight: 700;
     line-height: 20px;
     padding-bottom: 3px;
     padding-top: 24px;
-}
-
-#car-detail ul li {
+  }
+  
+  #car-detail ul li {
     max-width: 557px;
-    color: #8A8A8A;
+    color: #8a8a8a;
     font-size: 14px;
     font-weight: 700;
     line-height: 175%;
     padding-left: 0;
-}
-
-#car-detail .frame-card {
+  }
+  
+  #car-detail .frame-card {
     max-width: 405px;
     max-height: 530px;
     border-radius: 8px;
     background: white;
     box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.15);
     padding: 24px;
-}
-
-#car-detail .accordion-button {
+  }
+  
+  #car-detail .accordion-button {
     box-shadow: none;
-}
-
-.content-card-bottom {
+  }
+  
+  .content-card-bottom {
     display: flex;
     justify-content: space-between;
     align-items: baseline;
-}
-
-.mt-4 {
+  }
+  
+  .mt-4 {
     margin: 0 !important;
-}
-
-.calendarInput label {
+  }
+  
+  .calendarInput label {
     font-family: Rubik;
     font-size: 12px;
     font-weight: 300;
     line-height: 18px;
-}
-
-.calendarInput .inputBox {
+  }
+  
+  .calendarInput .inputBox {
     display: flex;
     font-size: 14px;
     padding: 9px 12px;
     border-radius: 2px;
-    border: 1px solid #5CB85F;
+    border: 1px solid #5cb85f;
     width: 339px;
     height: 36px;
     gap: 1px;
-}
-
-.calendarInput svg {
+  }
+  
+  .calendarInput svg {
     position: relative;
     left: 100px;
     top: 29px;
-    color: #8A8A8A;
+    color: #8a8a8a;
     width: 18px;
     height: 18px;
     z-index: 2;
     cursor: pointer;
-}
-
-.calendarWrap {
+  }
+  
+  .calendarWrap {
     display: inline-block;
     position: relative;
-
-}
-
-.rdrMonth {
+  }
+  
+  .rdrMonth {
     margin-bottom: 2em !important;
-}
-
-
-.rdrDateDisplayWrapper {
+  }
+  
+  .rdrDateDisplayWrapper {
     display: none !important;
-}
-
-.calendarElements {
+  }
+  
+  .calendarElements {
     position: absolute;
     right: -510px;
     width: 340px;
@@ -132,20 +131,19 @@
     background-color: white;
     display: flex !important;
     border-radius: 4px;
-    border: 0px solid rgba(0, 0, 0, 0.30);
-    background: #FFF;
-    box-shadow: 0px 4px 12px 0px rgba(0, 0, 0, 0.10);
-
-}
-
-.calendarButton {
+    border: 0px solid rgba(0, 0, 0, 0.3);
+    background: #fff;
+    box-shadow: 0px 4px 12px 0px rgba(0, 0, 0, 0.1);
+  }
+  
+  .calendarButton {
     position: absolute;
     top: 310px;
     z-index: 1;
     left: 20px;
-}
-
-.calendarButton button {
+  }
+  
+  .calendarButton button {
     display: flex;
     width: 300px;
     padding: 8px 12px;
@@ -158,10 +156,10 @@
     flex: 1 0 0;
     border: none;
     border-radius: 2px;
-    background: #35B0A7;
-}
-
-.button {
+    background: #35b0a7;
+  }
+  
+  .button {
     display: flex;
     width: 358px;
     padding: 8px 12px;
@@ -170,17 +168,28 @@
     gap: 10px;
     border: none;
     border-radius: 2px;
-    background: #5CB85F;
-    color: #FFF;
+    background: #5cb85f;
+    color: #fff;
     font-size: 14px;
     font-weight: 700;
     line-height: 20px;
-}
-
-.button:hover {
+  }
+  
+  .button:hover {
     background: #47964a;
-}
-
-.button:disabled {
-    background: #35B0A733;
-}
+  }
+  
+  .button:disabled {
+    background: #35b0a733;
+  }
+  
+  .calendarInput span {
+    color: #d00c1a;
+    background: rgba(208, 12, 26, 0.1);
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 18px;
+    width: 60%;
+    padding: 2px 6px;
+  }
+  

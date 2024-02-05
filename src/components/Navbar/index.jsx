@@ -1,9 +1,31 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "./style.css";
 import { HashLink } from "react-router-hash-link";
 import * as formater from "../../helpers/formaters";
+import { useDispatch, useSelector } from "react-redux";
+import { setLoggedIn, setLoggedOut } from "../../redux/features/cars/auth/auth";
 
 const Navbar = () => {
+  const token = localStorage.getItem("accesToken");
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const isLogin = useSelector((state) => state.auth.isLoggedIn);
+
+  const handleButton = () => {
+    if (token) {
+      localStorage.removeItem("accesToken");
+      setTimeout(() => {
+        navigate("/sign-in");
+      }, 1000);
+      dispatch(setLoggedIn());
+      setTimeout(() => {
+        dispatch(setLoggedOut());
+      }, 2000);
+    } else {
+      navigate("/register");
+    }
+  };
+
   return (
     <header>
       <nav className="navbar navbar-expand-lg fixed-top">
@@ -82,6 +104,26 @@ const Navbar = () => {
                   <HashLink smooth={true} to={"/#faq"} className="nav-link">
                     FAQ
                   </HashLink>
+                </li>
+                <li>
+                  <div className="button-sign-out">
+                    <button
+                      onClick={handleButton || formater.scrollTop}
+                      type="button"
+                      className={`${
+                        token
+                          ? "btn btn-success border-0 hidden-button bg-danger"
+                          : "btn btn-success border-0 hidden-button"
+                      }`}
+                    >
+                      {token ? "Sign Out" : "Register"}
+                    </button>
+                    {isLogin && (
+                      <div className="card fw-bold bg-danger-subtle text-danger border-0 position-absolute p-3 top-100 start-50">
+                        Sign Out Berhasil
+                      </div>
+                    )}
+                  </div>
                 </li>
               </ul>
             </div>
