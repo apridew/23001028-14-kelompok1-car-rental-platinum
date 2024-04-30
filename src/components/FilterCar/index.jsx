@@ -23,7 +23,7 @@ const FilterCar = () => {
         inputCategory: categoryCar,
         inputAvailable: availableCar,
         inputMin: minPrice,
-        inputMax: maxPrice,
+        inputMax: maxPrice || 9999999999,
       })
     );
   }, []);
