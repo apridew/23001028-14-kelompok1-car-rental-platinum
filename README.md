@@ -1,4 +1,4 @@
-# Binar Car Rental for Customer - Platinum Challenge
+# Car Rental for Customer - Platinum Challenge
 
 This project is part of the Binar Academy for Platinum Challenge.
 
