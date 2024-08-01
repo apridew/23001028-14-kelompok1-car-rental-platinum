@@ -23,7 +23,7 @@ const FilterCar = () => {
         inputCategory: categoryCar,
         inputAvailable: availableCar,
         inputMin: minPrice,
-        inputMax: maxPrice || 9999999999,
+        inputMax: maxPrice,
       })
     );
   }, []);
@@ -41,16 +41,14 @@ const FilterCar = () => {
     if (valueOption === "0-399999") {
       setMinPrice(0);
       setMaxPrice(399999);
-    } else if (valueOption === "400000-600000") {
-      setMinPrice(400000);
-      setMaxPrice(600000);
     } else if (valueOption === "400001-9999999999") {
       setMinPrice(400001);
-      setMaxPrice(9999999999);
+      setMaxPrice("");
     } else {
       setMinPrice(0);
-      setMaxPrice(9999999999);
+      setMaxPrice("");
     }
+    console.log(valueOption);
   };
 
   const handleAvailableCar = (e) => {
@@ -102,7 +100,7 @@ const FilterCar = () => {
     setCategoryCar("");
     setAvailableCar(false);
     setMinPrice("");
-    setMaxPrice(9999999999);
+    setMaxPrice("");
     setIsSubmit(false);
   };
 
@@ -149,7 +147,6 @@ const FilterCar = () => {
             >
               <option value="">Masukan Harga Sewa per Hari</option>
               <option value="0-399999">&lt; Rp. 400.000</option>
-              <option value="400000-600000">Rp 400.000 - Rp 600.000</option>
               <option value="400001-9999999999">&gt; Rp. 400.000</option>
             </select>
           </div>
