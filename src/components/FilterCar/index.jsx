@@ -12,6 +12,7 @@ const FilterCar = () => {
   const [availableCar, setAvailableCar] = useState(false);
   const [minPrice, setMinPrice] = useState("");
   const [maxPrice, setMaxPrice] = useState("");
+  const [priceRange, setPriceRange] = useState("");
 
   const { carList, loading } = useSelector((state) => state.cars);
   const dispatch = useDispatch();
@@ -38,6 +39,7 @@ const FilterCar = () => {
 
   const handlePriceCar = (e) => {
     const valueOption = e.target.value;
+    setPriceRange(valueOption);
     if (valueOption === "0-399999") {
       setMinPrice(0);
       setMaxPrice(399999);
@@ -48,7 +50,6 @@ const FilterCar = () => {
       setMinPrice(0);
       setMaxPrice("");
     }
-    console.log(valueOption);
   };
 
   const handleAvailableCar = (e) => {
@@ -143,7 +144,7 @@ const FilterCar = () => {
               onChange={handlePriceCar}
               name="price"
               id="price"
-              value={`${minPrice}-${maxPrice}`}
+              value={priceRange}
             >
               <option value="">Masukan Harga Sewa per Hari</option>
               <option value="0-399999">&lt; Rp. 400.000</option>
